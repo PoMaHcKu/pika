@@ -17,19 +17,19 @@ export class RegistrationDao extends BaseDao {
                 return response.data
             })
             .catch(err => {
-                console.log(err);
-                alert("Username or email already exists")
+                console.log(err.response.data.error);
+                alert(err.response.data.error);
             });
     }
 
     authentication = (user) => {
         return this.baseRequest
-            .get("login", {headers: {"Authorization": "Basic " + getBase64AuthData(user)}})
-            .then(response => response)
-            .catch(response => {
-                console.log(response);
-                alert("Incorrect username or password");
-            });
+            .get("sign-in", {headers: {"Authorization": "Basic " + getBase64AuthData(user)}})
+            .then(response => response.data)
+            .catch(err => {
+            console.log(err.response.data.error);
+            alert(err.response.data.error);
+        });
     }
 
     logout = () => {
