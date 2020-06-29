@@ -2,6 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import style from "./Navbar.module.css";
 import {connect} from "react-redux";
+import {logout} from "../../redux/AuthenticationReducer";
 
 const Navbar = (props) => {
     return (
@@ -14,7 +15,9 @@ const Navbar = (props) => {
             </div>
             {props.isAuth ?
                 <div className={style.item}>
-                    <NavLink to={"/logout"} activeClassName={style.active}>Log out</NavLink>
+                    <NavLink to={"/logout"} activeClassName={style.active}>
+                        <div onClick={props.logout}>Sign out</div>
+                    </NavLink>
                 </div>
                 :
                 <div>
@@ -34,4 +37,8 @@ let mapStateToProps = (state) => ({
     isAuth: state.authenticationState.authenticatedUser != null
 })
 
-export default connect(mapStateToProps)(Navbar);
+let mapDispatchToProps = {
+    logout
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

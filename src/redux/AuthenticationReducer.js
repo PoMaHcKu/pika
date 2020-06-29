@@ -41,6 +41,10 @@ const setAuthenticatedUser = (user) => ({
     user
 });
 
+const deleteAuthenticatedUser = () => ({
+    type: LOGOUT
+})
+
 const authenticatedDao = new RegistrationDao();
 
 export const authenticate = (user) => {
@@ -57,7 +61,8 @@ export const authenticate = (user) => {
 
 export const logout = () => {
     return (dispatch) => {
-        authenticatedDao.logout();
+        authenticatedDao.logout()
+            .then(dispatch(deleteAuthenticatedUser()));
     }
 }
 
