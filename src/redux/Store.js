@@ -3,6 +3,7 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import thankMiddleWare from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
 import authenticationReducer from "./AuthenticationReducer";
+import postReducer from "./PostRducer";
 
 const saveState = (state) => {
     try {
@@ -27,6 +28,7 @@ let reducers = combineReducers(
     {
         registrationState: registrationReducer,
         authenticationState: authenticationReducer,
+        postsState: postReducer,
         form: formReducer
     }
 );
