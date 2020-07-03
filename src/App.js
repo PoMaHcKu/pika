@@ -1,5 +1,6 @@
 import React from 'react';
 import {Col, Container, Row} from "reactstrap";
+import style from "./App.module.css"
 import Header from "./components/header/header";
 import {BrowserRouter, Route} from "react-router-dom";
 import RegistrationContainer from "./components/registration/RegistrationContainer";
@@ -13,7 +14,7 @@ function App() {
         <BrowserRouter>
             <Container fluid={true}>
                 <Row>
-                    <Col className={"col-xs-12"}>
+                    <Col className={`col-xs-12`}>
                         <Header/>
                     </Col>
                 </Row>
@@ -21,7 +22,7 @@ function App() {
                     <Col className={"col-2 sidebar"}>
                         <Navbar/>
                     </Col>
-                    <Col className={"col-10 content"}>
+                    <Col className={`col-10 content ${style.contentWrapper}`}>
                         <Container>
                             <Row>
                                 <Col>Search some posts...</Col>
