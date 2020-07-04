@@ -1,0 +1,9 @@
+.sortButton{
+    border: dimgray 1px solid;
+    color: gray;
+    margin-bottom: 5px;
+}
+
+.sortButton:hover {
+    color: black;
+}
