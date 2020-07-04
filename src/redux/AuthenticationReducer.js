@@ -49,6 +49,7 @@ const authenticatedDao = new RegistrationDao();
 
 export const authenticate = (user) => {
     return (dispatch) => {
+        dispatch(changeProcessStatus());
         authenticatedDao.authentication(user)
             .then(data => {
                 dispatch(changeProcessStatus());

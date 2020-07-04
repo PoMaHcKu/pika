@@ -1,6 +1,7 @@
 import * as React from "react";
 import style from "./Posts.module.css"
 import {Col, Container, Row} from "reactstrap";
+import Preloader from "../common/preloader/Preloader";
 
 
 const Posts = (props) => {
@@ -19,10 +20,9 @@ const Posts = (props) => {
         </Row>
     )
 
-
     return (
         <Container>
-            {posts}
+            {props.isLoading ? <Preloader/> : posts}
         </Container>
     )
 }

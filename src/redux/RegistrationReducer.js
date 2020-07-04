@@ -39,6 +39,7 @@ const registrationDao = new RegistrationDao();
 
 export const registrationUser = (user) => {
     return (dispatch) => {
+        dispatch(changeProcessStatus());
         registrationDao.registration(user)
             .then(data => {
                 dispatch(changeProcessStatus());

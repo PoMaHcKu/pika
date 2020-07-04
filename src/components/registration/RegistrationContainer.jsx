@@ -1,14 +1,14 @@
 import * as React from "react";
 import RegistrationForm from "./RegistrationForm";
 import {connect} from "react-redux";
-import {changeProcessStatus, registrationUser} from "../../redux/RegistrationReducer";
+import {registrationUser} from "../../redux/RegistrationReducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/WithRedirectToMain";
+import Preloader from "../common/preloader/Preloader";
 
 class RegistrationContainer extends React.Component {
 
     registration = (form) => {
-        this.props.changeProcessStatus();
         let user = {
             username: form.username,
             email: form.email,
@@ -21,8 +21,11 @@ class RegistrationContainer extends React.Component {
         return (
             <div>
                 <h3>Registration</h3>
-                <RegistrationForm onSubmit={this.registration}
-                                  isProcess={this.props.isProcess}/>
+                {this.props.isProcess ?
+                    <Preloader/> :
+                    <RegistrationForm onSubmit={this.registration}
+                                      isProcess={this.props.isProcess}/>
+                }
             </div>
         )
     }
@@ -34,7 +37,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     registrationUser,
-    changeProcessStatus
 }
 
 export default compose(

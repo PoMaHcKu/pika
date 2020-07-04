@@ -12,17 +12,19 @@ class PostsContainer extends React.Component {
 
     render() {
         return (
-            <Posts posts={this.props.posts}/>
+            <Posts posts={this.props.posts}
+                   isLoading={this.props.isLoading}/>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    posts: state.postsState.posts
+    posts: state.postsState.posts,
+    isLoading: state.postsState.isLoading,
 })
 
 const mapDispatchToProps = {
-    getPosts
+    getPosts,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);

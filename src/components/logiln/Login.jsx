@@ -1,14 +1,14 @@
 import * as React from "react";
-import {authenticate, changeProcessStatus} from "../../redux/AuthenticationReducer";
+import {authenticate} from "../../redux/AuthenticationReducer";
 import {connect} from "react-redux";
 import LoginForm from "./LoginForm";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/WithRedirectToMain";
+import Preloader from "../common/preloader/Preloader";
 
 class Login extends React.Component {
 
     authentication = (form) => {
-        this.props.changeProcessStatus();
         let user = {
             username: form.username,
             password: form.password
@@ -20,8 +20,10 @@ class Login extends React.Component {
         return (
             <div>
                 <h3>Sign in</h3>
-                <LoginForm onSubmit={this.authentication}
-                           isProcess={this.props.isProcess}/>
+                {this.props.isProcess ? <Preloader/> :
+                    <LoginForm onSubmit={this.authentication}
+                               isProcess={this.props.isProcess}/>
+                }
             </div>
         )
     }
@@ -32,8 +34,7 @@ let mapStateToProps = (state) => ({
 });
 
 let mapDispatchToProps = {
-    authenticate,
-    changeProcessStatus
+    authenticate
 }
 
 export default compose(
