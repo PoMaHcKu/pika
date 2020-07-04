@@ -2,6 +2,10 @@ import * as React from "react";
 import style from "./Posts.module.css"
 import {Col, Container, Row} from "reactstrap";
 import Preloader from "../common/preloader/Preloader";
+import {NavLink, Route} from "react-router-dom";
+
+const POPULAR = "mark";
+const LATEST = "updated";
 
 
 const Posts = (props) => {
@@ -20,9 +24,22 @@ const Posts = (props) => {
         </Row>
     )
 
+    const setSort = (sort) => {
+        props.setSort(0, 10, sort);
+    }
+
     return (
         <Container>
-            {props.isLoading ? <Preloader/> : posts}
+            <Row>
+                <Col>
+                    <NavLink to={"/posts/popular"} activeClassName={style.active} onClick={() => setSort(POPULAR)}>POPULAR</NavLink>
+                </Col>
+                <Col>
+                    <NavLink to={"/posts/latest"} activeClassName={style.active} onClick={() => setSort(LATEST)}>LATEST</NavLink>
+                </Col>
+            </Row>
+            <Route path={"/posts/popular"} render={() => props.isLoading ? <Preloader/> : posts}/>
+            <Route path={"/posts/latest"} render={() => props.isLoading ? <Preloader/> : posts}/>
         </Container>
     )
 }

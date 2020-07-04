@@ -1,10 +1,12 @@
 import {PostDao} from "../dao/PostDao";
 
-const SET_POSTS = "SET";
+const SET_POSTS = "SET-POSTS";
+const SET_SORT = "SET-SORT";
 const CHANGE_LOAD_STATUS = "LOAD";
 
 const defaultState = {
     posts: [],
+    sort: "id",
     openedPost: null,
     isLoading: false
 }
@@ -16,6 +18,11 @@ const postReducer = (state = defaultState, action) => {
                 ...state,
                 posts: JSON.parse(JSON.stringify(action.posts)),
             }
+        case SET_SORT:
+            return {
+                ...state,
+                sort: action.sort,
+            }
         case CHANGE_LOAD_STATUS:
             return {
                 ...state,
@@ -26,22 +33,26 @@ const postReducer = (state = defaultState, action) => {
     }
 }
 
-export const setPosts = (posts) => ({
+const setPosts = (posts) => ({
     type: SET_POSTS,
     posts
 })
+export const setSort = (sort) => ({
+    type: SET_SORT,
+    sort
+})
 
-export const changeLoadingStatus = () => ({
+const changeLoadingStatus = () => ({
     type: CHANGE_LOAD_STATUS
 })
 
 const postDao = new PostDao();
 
-export const getPosts = () => {
+export const getPosts = (sort = defaultState.sort, page = 0, size = 10) => {
     return (dispatch) => {
         dispatch(changeLoadingStatus());
         postDao
-            .getPosts()
+            .getPosts(sort, page, size)
             .then(response => {
                 dispatch(changeLoadingStatus());
                 dispatch(setPosts(response.data.content));
