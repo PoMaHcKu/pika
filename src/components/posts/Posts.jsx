@@ -4,32 +4,39 @@ import {Col, Container, Row} from "reactstrap";
 import Preloader from "../common/preloader/Preloader";
 import SortButtons from "./sort-button/SortButtons";
 import Sections from "./section/Sections";
+import {NavLink} from "react-router-dom";
 
 const Posts = (props) => {
 
+    const selectPost = (post) => {
+        props.setOpendPost(post);
+    }
+
     let posts = props.posts.map(post =>
-        <Row key={post.id} className={`${style.post} col-12`}>
-            <Col className={"col-5"}>
-                <Row>
-                    <Col className={style.title}>
-                        <span>{post.title}</span>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className={style.like}>
-                        <span>Like: {post.mark}</span>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className={style.created}>
-                        <span>Created: {post.created}</span>
-                    </Col>
-                </Row>
-            </Col>
-            <Col className={`col-7 ${style.article}`}>
-                <Sections sections={post.sections}/>
-            </Col>
-        </Row>
+        <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)} key={post.id} >
+            <Row className={`col-12 ${style.post}`}>
+                <Col className={"col-5"}>
+                    <Row>
+                        <Col className={style.title}>
+                            <span>{post.title}</span>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={style.like}>
+                            <span>Like: {post.mark}</span>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={style.created}>
+                            <span>Created: {post.created}</span>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col className={`col-7`}>
+                    <Sections sections={post.sections}/>
+                </Col>
+            </Row>
+        </NavLink>
     )
 
     return (

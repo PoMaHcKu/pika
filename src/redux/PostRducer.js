@@ -2,6 +2,7 @@ import {PostDao} from "../dao/PostDao";
 
 const SET_POSTS = "SET-POSTS";
 const CHANGE_LOAD_STATUS = "LOAD";
+const SET_OPENED_POST = "OPEN";
 
 const defaultState = {
     posts: [],
@@ -21,6 +22,16 @@ const postReducer = (state = defaultState, action) => {
                 ...state,
                 isLoading: action.status
             }
+        case SET_OPENED_POST:
+            return {
+                ...state,
+                openedPost: {
+                    ...action.post,
+                    sections: [
+                        ...action.post.sections
+                    ]
+                }
+            }
         default:
             return state;
     }
@@ -34,6 +45,11 @@ const setPosts = (posts) => ({
 const changeLoadingStatus = (status) => ({
     type: CHANGE_LOAD_STATUS,
     status
+})
+
+export const setOpenedPost = (post) => ({
+    type: SET_OPENED_POST,
+    post
 })
 
 const postDao = new PostDao();

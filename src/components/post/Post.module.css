@@ -1,0 +1,16 @@
+.postContainer {
+    padding: 5px 0 0 0;
+    margin: 5px 0;
+}
+
+.title, .sections, .mark,.created {
+    padding: 0;
+}
+
+.title {
+    font: bolder 1.5em Arial;
+}
+
+.mark, .created {
+    color: #535353;
+}

@@ -6,7 +6,7 @@ let Sections = (props) => {
             return (
                 <Row key={section.id}>
                     <Col>
-                        <h6>{section.article}</h6>
+                        {section.article}
                     </Col>
                 </Row>
             )

@@ -7,6 +7,7 @@ import RegistrationContainer from "./components/registration/RegistrationContain
 import Navbar from "./components/navbar/Navbar";
 import Login from "./components/logiln/Login";
 import PostsContainer from "./components/posts/PostsContainer";
+import PostContainer from "./components/post/PostContainer";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                             </Row>
                             <Route path={"/registration"} render={() => <RegistrationContainer/>}/>
                             <Route path={"/posts"} render={() => <PostsContainer/>}/>
+                            <Route path={"/post"} render={() => <PostContainer/>}/>
                             <Route path={"/login"} render={() => <Login/>}/>
                             <Route exactPath={"/"}/>
                         </Container>

@@ -1,0 +1,16 @@
+.sectionsContainer {
+    padding: 0;
+}
+.title {
+    font: bold 1.2em Arial;
+    margin: 5px;
+}
+
+.article {
+    text-align: left;
+}
+
+.likes {
+    text-align: center;
+    color: dimgray;
+}
