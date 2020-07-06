@@ -5,8 +5,7 @@ import {connect} from "react-redux";
 
 class AuthorContainer extends React.Component {
 
-    constructor(props) {
-        super(props);
+    componentDidMount() {
         this.props.getAuthorPost(this.props.userId);
     }
 
