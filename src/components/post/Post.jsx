@@ -2,6 +2,7 @@ import * as React from "react";
 import {Col, Container, Row} from "reactstrap";
 import SectionsContainer from "./sections/SectionsContainer";
 import style from "./Post.module.css"
+import CommentaryContainer from "./commentary/CommentaryContainer";
 
 const Post = (props) => {
     return (
@@ -22,6 +23,11 @@ const Post = (props) => {
                 </Col>
                 <Col>
                     {props.post.created}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <CommentaryContainer postId={props.post.id}/>
                 </Col>
             </Row>
         </Container>

@@ -1,10 +1,10 @@
 .postContainer {
-    padding: 5px 0 0 0;
     margin: 5px 0;
+    border: gray 1px solid;
+    border-radius: 10px;
 }
 
 .title, .sections, .mark,.created {
-    padding: 0;
 }
 
 .title {

@@ -3,7 +3,6 @@ import {getPosts, setOpenedPost} from "../../redux/PostRducer";
 import {connect} from "react-redux";
 import Posts from "./Posts";
 
-
 class PostsContainer extends React.Component {
 
     componentDidMount() {
@@ -24,7 +23,6 @@ class PostsContainer extends React.Component {
 const mapStateToProps = (state) => ({
     posts: state.postsState.posts,
     isLoading: state.postsState.isLoading,
-    sort: state.postsState.sort
 })
 
 const mapDispatchToProps = {
