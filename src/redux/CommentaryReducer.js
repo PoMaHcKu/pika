@@ -20,8 +20,8 @@ const commentaryReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 commentaries: [
-                    ...state.commentaries,
                     action.commentary,
+                    ...state.commentaries,
                 ]
             }
         case CHANGE_STATUS:
@@ -38,7 +38,7 @@ const setCommentaries = (commentaries) => ({
     type: SET_COMMENTARIES,
     commentaries
 })
-const addCommentary = (commentary) => ({
+export const addCommentary = (commentary) => ({
     type: ADD_COMMENTARY,
     commentary
 })

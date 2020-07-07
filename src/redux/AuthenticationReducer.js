@@ -25,15 +25,16 @@ const authenticationReducer = (state = defaultState, action) => {
         case CHANGE_PROCESS:
             return {
                 ...state,
-                isProcess: !state.isProcess
+                isProcess: action.isProcess
             }
         default:
             return state;
     }
 }
 
-export const changeProcessStatus = () => ({
-    type: CHANGE_PROCESS
+export const changeProcessStatus = (isProcess) => ({
+    type: CHANGE_PROCESS,
+    isProcess
 })
 
 const setAuthenticatedUser = (user) => ({
@@ -49,10 +50,10 @@ const authenticatedDao = new RegistrationDao();
 
 export const authenticate = (user) => {
     return (dispatch) => {
-        dispatch(changeProcessStatus());
+        dispatch(changeProcessStatus(true));
         authenticatedDao.authentication(user)
             .then(data => {
-                dispatch(changeProcessStatus());
+                dispatch(changeProcessStatus(false));
                 if (data && data.id != null) {
                     dispatch(setAuthenticatedUser(data));
                 } else (alert(data));
