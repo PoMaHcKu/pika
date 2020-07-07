@@ -17,7 +17,7 @@ class CommentaryContainer extends React.Component {
     render() {
         return (
             <div>
-                <SockJsClient url="http://pikachy.herokuapp.com/commentary-messaging" topics={["/chat/commentaries"]}
+                <SockJsClient url="https://pikachy.herokuapp.com/commentary-messaging" topics={["/chat/commentaries"]}
                               onMessage={msg => this.props.addCommentary(msg)}
                               ref={client => this.clientRef = client}/>
                 <Commentary commentaries={this.props.commentaries}
