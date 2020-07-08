@@ -2,23 +2,31 @@ import React from 'react';
 import {Col, Container, Row} from "reactstrap";
 import style from "./App.module.css"
 import Header from "./components/header/header";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import RegistrationContainer from "./components/registration/RegistrationContainer";
 import Navbar from "./components/navbar/Navbar";
 import Login from "./components/logiln/Login";
 import PostsContainer from "./components/posts/PostsContainer";
 import PostContainer from "./components/post/PostContainer";
-import {authenticate} from "./redux/AuthenticationReducer";
 import {connect} from "react-redux";
+import {compose} from "redux";
+import {initializeApp} from "./redux/AppReduser";
+import Preloader from "./components/common/preloader/Preloader";
 
 
 class App extends React.Component {
 
     componentDidMount() {
-        this.props.authenticate();
+        this.props.initializeApp();
     }
 
     render() {
+
+        if (!this.props.isInitialized) {
+            debugger;
+            return <Preloader/>
+        }
+
         return (
             <BrowserRouter>
                 <Container fluid={true}>
@@ -50,4 +58,11 @@ class App extends React.Component {
     }
 }
 
-export default connect(null, {authenticate})(App);
+const mapStateToProps = (state) => ({
+    isInitialized: state.appState.isInitialized
+})
+
+export default compose(
+    connect(mapStateToProps, {initializeApp}),
+    withRouter
+)(App);

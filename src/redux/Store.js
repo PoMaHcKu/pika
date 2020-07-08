@@ -6,6 +6,7 @@ import authenticationReducer from "./AuthenticationReducer";
 import postReducer from "./PostRducer";
 import commentaryReducer from "./CommentaryReducer";
 import userReducer from "./UsersReducer";
+import appReducer from "./AppReduser";
 
 const saveState = (state) => {
     try {
@@ -28,6 +29,7 @@ const loadState = () => {
 
 let reducers = combineReducers(
     {
+        appState: appReducer,
         registrationState: registrationReducer,
         authenticationState: authenticationReducer,
         postsState: postReducer,

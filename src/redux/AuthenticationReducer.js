@@ -50,24 +50,33 @@ const authenticatedDao = new RegistrationDao();
 
 export const authenticate = () => dispatch => {
     dispatch(changeProcessStatus(true));
-    authenticatedDao.authentication()
+    return authenticatedDao.authentication()
         .then(data => {
             dispatch(changeProcessStatus(false));
-            if (data && data.id != null) {
+            if (data.id) {
                 dispatch(setAuthenticatedUser(data));
-            } else (alert(data));
+            } else {
+                dispatch(setAuthenticatedUser(null));
+            }
         });
 }
 
 export const login = (user) => dispatch => {
+    dispatch(changeProcessStatus(true));
     authenticatedDao.login(user)
-        .then(dispatch(authenticate()));
+        .then(() => {
+            dispatch(authenticate());
+        });
 }
 
 export const logout = () => {
     return (dispatch) => {
         authenticatedDao.logout()
-            .then(dispatch(deleteAuthenticatedUser()));
+            .then(response => {
+                if (!response.error) {
+                    dispatch(deleteAuthenticatedUser());
+                }
+            });
     }
 }
 

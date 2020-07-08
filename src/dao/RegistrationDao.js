@@ -24,7 +24,8 @@ export class RegistrationDao extends BaseDao {
 
     login = (user) => {
         return this.baseRequest
-            .get("sign-in", {headers: {"Authorization": "Basic " + getBase64AuthData(user)}});
+            .get("login", {headers: {"Authorization": "Basic " + getBase64AuthData(user)}})
+            .then();
     }
 
     authentication = () => {
@@ -33,7 +34,6 @@ export class RegistrationDao extends BaseDao {
             .then(response => response.data)
             .catch(err => {
                 console.log(err.response.data.error);
-                alert(err.response.data.error);
             });
     }
 
