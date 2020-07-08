@@ -15,7 +15,7 @@ export const WithCommentarySocket = Component => {
         render() {
             return (
                 <div>
-                    <SockJsClient url="http://pikachy.herokuapp.com/commentary-messaging"
+                    <SockJsClient url="https://pikachy.herokuapp.com/commentary-messaging"
                                   topics={["/chat/commentaries"]}
                                   onMessage={msg => this.props.addCommentary(msg)}
                                   ref={client => this.clientRef = client}/>
