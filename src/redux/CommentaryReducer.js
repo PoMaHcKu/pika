@@ -1,8 +1,10 @@
 import {CommentaryDao} from "../dao/CommentaryDao";
+import {UserDao} from "../dao/UserDao";
 
 const SET_COMMENTARIES = "SET-COMMENTARIES";
 const ADD_COMMENTARY = "ADD-COMMENTARY";
 const CHANGE_STATUS = "CHANGE-LOADING-STATUS";
+const SET_AUTHOR = "SET-AUTHOR";
 
 let defaultState = {
     commentaries: [],
@@ -29,6 +31,19 @@ const commentaryReducer = (state = defaultState, action) => {
                 ...state,
                 isLoading: action.isLoading
             }
+        case SET_AUTHOR:
+            return {
+                ...state,
+                commentaries: state.commentaries.map(commentary => {
+                    if (commentary.id === action.commentaryId) {
+                        commentary = {
+                            ...commentary,
+                            author: action.user.username
+                        }
+                    }
+                    return commentary;
+                })
+            }
         default:
             return state;
     }
@@ -47,17 +62,29 @@ const changeLoadingStatus = (isLoading) => ({
     isLoading
 })
 
-const commentaryDao = new CommentaryDao();
+const setAuthor = (commentaryId, user) => ({
+    type: SET_AUTHOR,
+    commentaryId,
+    user
+})
 
-export const getCommentaries = (postId, sort, page, size) => {
-    return (dispatch) => {
-        dispatch(changeLoadingStatus(true));
-        commentaryDao.getCommentaries(postId, sort, page, size)
-            .then(response => {
-                dispatch(changeLoadingStatus(false));
-                dispatch(setCommentaries(response.data.content));
-            })
-    }
+const commentaryDao = new CommentaryDao();
+const userDao = new UserDao();
+
+export const getCommentaries = (postId, sort, page, size) => dispatch => {
+    dispatch(changeLoadingStatus(true));
+    commentaryDao.getCommentaries(postId, sort, page, size)
+        .then(response => {
+            dispatch(changeLoadingStatus(false));
+            dispatch(setCommentaries(response.data.content));
+        });
+}
+
+export const getAuthor = (commentary) => dispatch => {
+    userDao.getUser(commentary.user)
+        .then(response => {
+            dispatch(setAuthor(commentary.id, response.data));
+        });
 }
 
 export default commentaryReducer;

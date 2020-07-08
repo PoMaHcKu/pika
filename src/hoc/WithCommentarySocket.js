@@ -19,7 +19,7 @@ export const WithCommentarySocket = Component => {
                                   topics={["/chat/commentaries"]}
                                   onMessage={msg => this.props.addCommentary(msg)}
                                   ref={client => this.clientRef = client}/>
-                    <Component {...this.props} addCommentary={this.sendMessage}/>)
+                    <Component {...this.props} addCommentary={this.sendMessage}/>
                 </div>
             )
         }

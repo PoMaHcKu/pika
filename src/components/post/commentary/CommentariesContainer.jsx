@@ -1,11 +1,11 @@
 import * as React from "react";
-import Commentary from "./Commentary";
-import {addCommentary, getCommentaries} from "../../../redux/CommentaryReducer";
+import Commentaries from "./Commentaries";
+import {getCommentaries} from "../../../redux/CommentaryReducer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {WithCommentarySocket} from "../../../hoc/WithCommentarySocket";
 
-class CommentaryContainer extends React.Component {
+class CommentariesContainer extends React.Component {
 
     componentDidMount() {
         this.props.getCommentaries(this.props.postId);
@@ -13,10 +13,10 @@ class CommentaryContainer extends React.Component {
 
     render() {
         return (
-            <Commentary commentaries={this.props.commentaries}
-                        sendComment={this.sendMessage}
-                        postId={this.props.postId}
-                        isAuth={this.props.isAuth}
+            <Commentaries commentaries={this.props.commentaries}
+                          sendComment={this.props.addCommentary}
+                          postId={this.props.postId}
+                          isAuth={this.props.isAuth}
             />
         )
     }
@@ -24,16 +24,14 @@ class CommentaryContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     commentaries: state.commentariesState.commentaries,
-    isLoading: state.commentariesState.isLoading,
     isAuth: state.authenticationState.authenticatedUser !== null,
 })
 
 const mapDispatchToProps = {
     getCommentaries,
-    addCommentary,
 }
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     WithCommentarySocket
-)(CommentaryContainer);
+)(CommentariesContainer);
