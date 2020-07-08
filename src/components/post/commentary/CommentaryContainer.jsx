@@ -2,7 +2,8 @@ import * as React from "react";
 import Commentary from "./Commentary";
 import {addCommentary, getCommentaries} from "../../../redux/CommentaryReducer";
 import {connect} from "react-redux";
-import SockJsClient from 'react-stomp';
+import {compose} from "redux";
+import {WithCommentarySocket} from "../../../hoc/WithCommentarySocket";
 
 class CommentaryContainer extends React.Component {
 
@@ -10,22 +11,13 @@ class CommentaryContainer extends React.Component {
         this.props.getCommentaries(this.props.postId);
     }
 
-    sendMessage = (msg) => {
-        this.clientRef.sendMessage("/app/commentary", JSON.stringify(msg));
-    }
-
     render() {
         return (
-            <div>
-                <SockJsClient url="http://pikachy.herokuapp.com/commentary-messaging" topics={["/chat/commentaries"]}
-                              onMessage={msg => this.props.addCommentary(msg)}
-                              ref={client => this.clientRef = client}/>
-                <Commentary commentaries={this.props.commentaries}
-                            sendComment={this.sendMessage}
-                            postId={this.props.postId}
-                            isAuth={this.props.isAuth}
-                />
-            </div>
+            <Commentary commentaries={this.props.commentaries}
+                        sendComment={this.sendMessage}
+                        postId={this.props.postId}
+                        isAuth={this.props.isAuth}
+            />
         )
     }
 }
@@ -41,4 +33,7 @@ const mapDispatchToProps = {
     addCommentary,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentaryContainer);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithCommentarySocket
+)(CommentaryContainer);
