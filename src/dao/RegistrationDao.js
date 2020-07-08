@@ -22,18 +22,23 @@ export class RegistrationDao extends BaseDao {
             });
     }
 
-    authentication = (user) => {
+    login = (user) => {
         return this.baseRequest
-            .get("sign-in", {headers: {"Authorization": "Basic " + getBase64AuthData(user)}})
+            .get("sign-in", {headers: {"Authorization": "Basic " + getBase64AuthData(user)}});
+    }
+
+    authentication = () => {
+        return this.baseRequest
+            .get("auth-me")
             .then(response => response.data)
             .catch(err => {
-            console.log(err.response.data.error);
-            alert(err.response.data.error);
-        });
+                console.log(err.response.data.error);
+                alert(err.response.data.error);
+            });
     }
 
     logout = () => {
         return this.baseRequest
-            .get("logout");
+            .get("sign-out");
     }
 }

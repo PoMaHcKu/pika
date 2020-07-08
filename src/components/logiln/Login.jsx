@@ -1,5 +1,5 @@
 import * as React from "react";
-import {authenticate} from "../../redux/AuthenticationReducer";
+import {login} from "../../redux/AuthenticationReducer";
 import {connect} from "react-redux";
 import LoginForm from "./LoginForm";
 import {compose} from "redux";
@@ -13,7 +13,7 @@ class Login extends React.Component {
             username: form.username,
             password: form.password
         }
-        this.props.authenticate(user);
+        this.props.login(user);
     }
 
     render() {
@@ -34,7 +34,7 @@ let mapStateToProps = (state) => ({
 });
 
 let mapDispatchToProps = {
-    authenticate
+    login
 }
 
 export default compose(

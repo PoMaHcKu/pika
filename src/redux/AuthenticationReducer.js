@@ -48,17 +48,20 @@ const deleteAuthenticatedUser = () => ({
 
 const authenticatedDao = new RegistrationDao();
 
-export const authenticate = (user) => {
-    return (dispatch) => {
-        dispatch(changeProcessStatus(true));
-        authenticatedDao.authentication(user)
-            .then(data => {
-                dispatch(changeProcessStatus(false));
-                if (data && data.id != null) {
-                    dispatch(setAuthenticatedUser(data));
-                } else (alert(data));
-            });
-    }
+export const authenticate = () => dispatch => {
+    dispatch(changeProcessStatus(true));
+    authenticatedDao.authentication()
+        .then(data => {
+            dispatch(changeProcessStatus(false));
+            if (data && data.id != null) {
+                dispatch(setAuthenticatedUser(data));
+            } else (alert(data));
+        });
+}
+
+export const login = (user) => dispatch => {
+    authenticatedDao.login(user)
+        .then(dispatch(authenticate()));
 }
 
 export const logout = () => {

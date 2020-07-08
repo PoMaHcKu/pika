@@ -8,40 +8,46 @@ import Navbar from "./components/navbar/Navbar";
 import Login from "./components/logiln/Login";
 import PostsContainer from "./components/posts/PostsContainer";
 import PostContainer from "./components/post/PostContainer";
+import {authenticate} from "./redux/AuthenticationReducer";
+import {connect} from "react-redux";
 
 
-function App() {
-    return (
-        <BrowserRouter>
-            <Container fluid={true}>
-                <Row>
-                    <Col className={`col-xs-12`}>
-                        <Header/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className={"col-2 sidebar"}>
-                        <Navbar/>
-                    </Col>
-                    <Col className={`col-10 content ${style.contentWrapper}`}>
-                        <Container>
-                            <Row>
-                                <Col>Search some posts...</Col>
-                            </Row>
-                            <Route path={"/registration"} render={() => <RegistrationContainer/>}/>
-                            <Route path={"/posts"} render={() => <PostsContainer/>}/>
-                            <Route path={"/post"} render={() => <PostContainer/>}/>
-                            <Route path={"/login"} render={() => <Login/>}/>
-                            <Route exactPath={"/"}/>
-                        </Container>
-                    </Col>
-                </Row>
-                <Row>
+class App extends React.Component {
 
-                </Row>
-            </Container>
-        </BrowserRouter>
-    );
+    componentDidMount() {
+        this.props.authenticate();
+    }
+
+    render() {
+        return (
+            <BrowserRouter>
+                <Container fluid={true}>
+                    <Row>
+                        <Col className={`col-xs-12`}>
+                            <Header/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-2 sidebar"}>
+                            <Navbar/>
+                        </Col>
+                        <Col className={`col-10 content ${style.contentWrapper}`}>
+                            <Container>
+                                <Row>
+                                    <Col>Search some posts...</Col>
+                                </Row>
+                                <Route path={"/registration"} render={() => <RegistrationContainer/>}/>
+                                <Route path={"/posts"} render={() => <PostsContainer/>}/>
+                                <Route path={"/post"} render={() => <PostContainer/>}/>
+                                <Route path={"/login"} render={() => <Login/>}/>
+                                <Route exactPath={"/"}/>
+                            </Container>
+                        </Col>
+                    </Row>
+                </Container>
+            </BrowserRouter>
+        );
+    }
 }
 
-export default App;
+export default connect(null, {authenticate})(App);
