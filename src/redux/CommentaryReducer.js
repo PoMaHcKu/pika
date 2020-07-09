@@ -1,5 +1,6 @@
 import {CommentaryDao} from "../dao/CommentaryDao";
 import {UserDao} from "../dao/UserDao";
+import {setCountPage, setCurrentPage} from "./PaginationReducer";
 
 const SET_COMMENTARIES = "SET-COMMENTARIES";
 const ADD_COMMENTARY = "ADD-COMMENTARY";
@@ -77,6 +78,8 @@ export const getCommentaries = (postId, sort, page, size) => dispatch => {
         .then(response => {
             dispatch(changeLoadingStatus(false));
             dispatch(setCommentaries(response.data.content));
+            dispatch(setCountPage(response.data.totalPages));
+            dispatch(setCurrentPage(response.data.number));
         });
 }
 

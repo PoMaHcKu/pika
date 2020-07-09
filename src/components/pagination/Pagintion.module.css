@@ -1,0 +1,17 @@
+.pagination {
+    margin: 5px auto;
+    border: gray 1px solid;
+    border-radius: 10px;
+}
+
+.pagination .li {
+    display: inline-block;
+}
+
+.prevAndNext {
+    font: 1em Arial;
+}
+
+.active {
+    font: bold 1.2em Arial;
+}

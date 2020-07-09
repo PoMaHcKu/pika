@@ -3,6 +3,7 @@ import {Container} from "reactstrap";
 import style from "./Commentaries.module.css"
 import NewCommentaryForm from "./new-comment-form/NewCommentaryForm";
 import CommentaryContainer from "./commentary/CommentaryContainer";
+import Pagination from "../../pagination/Pagination";
 
 let Commentaries = (props) => {
 
@@ -22,7 +23,9 @@ let Commentaries = (props) => {
     return (
         <Container className={style.commentaryContainer}>
             {props.isAuth ? <NewCommentaryForm onSubmit={addCommentary}/> : null}
+            <Pagination postId={props.postId}/>
             {commentaries}
+            <Pagination postId={props.postId}/>
         </Container>
     )
 }
