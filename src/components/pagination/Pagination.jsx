@@ -9,7 +9,7 @@ class Pagination extends React.Component {
 
     handlePageClick = (data) => {
         this.setState({currentPage: data.selected, offset: this.props.pageCount}, () => {
-            this.props.getCommentaries(this.props.postId, this.props.sort,  this.props.pageCount);
+            this.props.getCommentaries(this.props.postId, this.props.sort, this.props.pageCount);
         });
     }
 
@@ -18,15 +18,20 @@ class Pagination extends React.Component {
         return (
             <Row>
                 <Col>
-                    <ReactPaginate
-                        pageCount={this.props.pageCount}
-                        itemsCountPerPage={10}
-                        breakLabel={<span>...</span>}
-                        onPageChange={this.handlePageClick}
-                        containerClassName={"pagination"}
-                        pageClassName={"page-item"}
-                        pageLinkclassName={"page-link"}
-                    />
+                    <nav aria-label="Search results pages">
+                        <ReactPaginate
+                            pageCount={this.props.pageCount}
+                            pageRangeDisplayed={2}
+                            marginPagesDisplayed={3}
+                            breakLabel={<span>...</span>}
+                            nextLabel={"NEXT"}
+                            previousLabel={"PREV"}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={"pagination justify-content-center"}
+                            activeClassName={style.active}
+                            breakClassName={style.break}
+                        />
+                    </nav>
                 </Col>
             </Row>
         )

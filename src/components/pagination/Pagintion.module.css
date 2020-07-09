@@ -8,10 +8,13 @@
     display: inline-block;
 }
 
-.prevAndNext {
-    font: 1em Arial;
+.break {
+    margin: 10px;
+    background: black;
 }
 
 .active {
     font: bold 1.2em Arial;
+    margin: 0 5px;
+    padding-top: 2px;
 }
