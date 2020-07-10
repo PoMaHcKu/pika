@@ -1,6 +1,6 @@
 import * as React from "react";
-import style from "./SortButtons.module.css"
 import {Col, Row} from "reactstrap";
+import {Button} from "../../common/button/Button";
 
 const POPULAR = "mark";
 const LATEST = "updated";
@@ -11,10 +11,10 @@ let SortButtons = (props) => {
     return (
         <Row>
             <Col>
-                <div className={`btn ${style.sortButton}`} onClick={() => props.getPosts(POPULAR)}>POPULAR</div>
+                <Button lable={"POPULAR"} onClick={() => props.getPosts(POPULAR)}/>
             </Col>
             <Col>
-                <div className={`btn ${style.sortButton}`} onClick={() => props.getPosts(LATEST)}>LATEST</div>
+                <Button lable={"LATEST"} onClick={() => props.getPosts(LATEST)}/>
             </Col>
         </Row>
     )

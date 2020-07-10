@@ -2,7 +2,7 @@ import * as React from "react";
 import {Col, Container, Row} from "reactstrap";
 import SectionsContainer from "./sections/SectionsContainer";
 import style from "./Post.module.css"
-import CommentaryContainer from "./commentary/CommentariesContainer";
+import CommentaryContainer from "./commentaryies/CommentariesContainer";
 
 const Post = (props) => {
     return (
