@@ -1,4 +1,5 @@
 import {PostDao} from "../dao/PostDao";
+import {setCountPage, setCurrentPage} from "./PaginationReducer";
 
 const SET_POSTS = "SET-POSTS";
 const CHANGE_LOAD_STATUS = "LOAD";
@@ -54,7 +55,7 @@ export const setOpenedPost = (post) => ({
 
 const postDao = new PostDao();
 
-export const getPosts = (sort = defaultState.sort, page = 0, size = 10) => {
+export const getPosts = (sort, page, size) => {
     return (dispatch) => {
         dispatch(changeLoadingStatus(true));
         postDao
@@ -62,6 +63,8 @@ export const getPosts = (sort = defaultState.sort, page = 0, size = 10) => {
             .then(response => {
                 dispatch(changeLoadingStatus(false));
                 dispatch(setPosts(response.data.content));
+                dispatch(setCountPage(response.data.totalPages));
+                dispatch(setCurrentPage(response.data.number));
             });
     }
 }

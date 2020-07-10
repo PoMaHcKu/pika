@@ -5,10 +5,6 @@ import Posts from "./Posts";
 
 class PostsContainer extends React.Component {
 
-    componentDidMount() {
-        this.props.getPosts();
-    }
-
     render() {
         return (
             <Posts posts={this.props.posts}

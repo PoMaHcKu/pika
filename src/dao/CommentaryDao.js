@@ -2,9 +2,9 @@ import {BaseDao} from "./BaseDao";
 
 export class CommentaryDao extends BaseDao {
 
-    getCommentaries = (postId, sort = "created", page = 0, size = 10) => {
+    getCommentaries = (sort = "created", page = 0, size = 10, postId) => {
         return this.baseRequest
-            .get(`commentary?postId=${postId}&page=${page}&size=${size}&sort=${sort}`)
+            .get(`commentary?page=${page}&size=${size}&sort=${sort}&postId=${postId}`)
             .then(response => response)
             .catch(response => response);
     }

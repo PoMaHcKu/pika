@@ -5,6 +5,7 @@ import Preloader from "../common/preloader/Preloader";
 import SortButtons from "./sort-button/SortButtons";
 import Sections from "./section/Sections";
 import {NavLink} from "react-router-dom";
+import Pagination from "../pagination/Pagination";
 
 const Posts = (props) => {
 
@@ -42,7 +43,9 @@ const Posts = (props) => {
     return (
         <Container className={style.postContainer}>
             <SortButtons getPosts={props.getPosts}/>
+            <Pagination onChangePage={props.getPosts}/>
             {props.isLoading ? <Preloader/> : posts}
+            <Pagination onChangePage={props.getPosts}/>
         </Container>
     )
 }

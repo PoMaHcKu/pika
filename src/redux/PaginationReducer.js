@@ -1,10 +1,13 @@
 const SET_COUNT_PAGE = "SET-COUNT-PAGE";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
+const SET_SORT = "SET-SORT";
+const SET_SIZE = "SET-SIZE";
 
 let defaultState = {
     pageCount: null,
-    currentPage: null,
-    sort: "created"
+    currentPage: 0,
+    size: 10,
+    sort: "created",
 }
 
 const paginationReducer = (state = defaultState, action) => {
@@ -18,6 +21,16 @@ const paginationReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 currentPage: action.currentPage
+            }
+        case SET_SORT:
+            return {
+                ...state,
+                sort: action.sort
+            }
+        case SET_SIZE:
+            return {
+                ...state,
+                size: action.size
             }
         default:
             return state;
