@@ -16,16 +16,14 @@ export const WithCommentarySocket = Component => {
             this.clientRef.sendMessage(`/app/commentary/${this.props.postId}`, JSON.stringify(msg));
         }
 
-        postId = this.props.postId;
-
         render() {
             return (
                 <div>
                     <SockJsClient url="https://pikachy.herokuapp.com/commentary-messaging"
-                                  topics={[`/topic/commentary/${this.postId}`]}
+                                  topics={[`/topic/commentary/${this.props.postId}`]}
                                   onMessage={msg => this.props.addCommentary(msg)}
                                   ref={client => this.clientRef = client}/>
-                    <Component addCommentary={this.sendMessage}/>
+                    <Component {...this.props} addCommentary={this.sendMessage}/>
                 </div>
             )
         }
