@@ -1,11 +1,10 @@
 import * as React from "react";
 import {Col, Row} from "reactstrap";
-import style from "../Commentaries.module.css";
+import style from "./Commentaries.module.css";
 
 let Commentary = (props) => {
     return (
-        <Row key={props.commentary.id} className={`col-12 ${style.commentary}`}>
-            <Row className={"col-12"}>
+        <Row key={props.commentary.id} className={style.commentary}>
                 <Col className={`col-12 ${style.author}`}>
                     <span>Author: {props.commentary.author}</span>
                 </Col>
@@ -15,7 +14,6 @@ let Commentary = (props) => {
                 <Col className={`col-12 ${style.created}`}>
                     <span>Sent: {props.commentary.created}</span>
                 </Col>
-            </Row>
         </Row>
     )
 }

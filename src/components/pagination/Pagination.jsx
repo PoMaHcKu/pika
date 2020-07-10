@@ -1,7 +1,6 @@
 import React from "react";
 import ReactPaginate from 'react-paginate';
 import {connect} from "react-redux";
-import style from "./Pagintion.module.css";
 import {Col, Row} from "reactstrap";
 import {getCommentaries} from "../../redux/CommentaryReducer";
 
@@ -9,27 +8,34 @@ class Pagination extends React.Component {
 
     handlePageClick = (data) => {
         this.setState({currentPage: data.selected, offset: this.props.pageCount}, () => {
-            this.props.getCommentaries(this.props.postId, this.props.sort, this.props.pageCount);
+            this.props.onChangePage(this.props.parrentId, this.props.sort, data.selected);
         });
     }
 
     render() {
-
         return (
             <Row>
                 <Col>
-                    <nav aria-label="Search results pages">
+                    <nav>
                         <ReactPaginate
                             pageCount={this.props.pageCount}
-                            pageRangeDisplayed={2}
-                            marginPagesDisplayed={3}
-                            breakLabel={<span>...</span>}
-                            nextLabel={"NEXT"}
-                            previousLabel={"PREV"}
+                            forcePage={this.props.currentPage}
+                            pageRangeDisplayed={3}
+                            marginPagesDisplayed={1}
+                            breakLabel={<pre> ... </pre>}
+                            nextLabel={"->"}
+                            previousLabel={"<-"}
                             onPageChange={this.handlePageClick}
-                            containerClassName={"pagination justify-content-center"}
-                            activeClassName={style.active}
-                            breakClassName={style.break}
+                            containerClassName={"pagination justify-content-center m-2"}
+                            breakClassName={"page-item pt-2"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                            activeLinkClassName={"active bg-dark border-dark"}
+                            previousClassName={"page-item"}
+                            previousLinkClassName={"page-link"}
+                            nextClassName={"page-item"}
+                            nextLinkClassName={"page-link"}
                         />
                     </nav>
                 </Col>

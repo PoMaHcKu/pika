@@ -1,12 +1,10 @@
 import * as React from "react";
 import {Container} from "reactstrap";
-import style from "./Commentaries.module.css"
 import NewCommentaryForm from "./new-comment-form/NewCommentaryForm";
 import CommentaryContainer from "./commentary/CommentaryContainer";
 import Pagination from "../../pagination/Pagination";
 
 let Commentaries = (props) => {
-
     let commentaries = props.commentaries.map(comment =>
         <CommentaryContainer key={comment.id} commentary={comment}/>
     )
@@ -21,11 +19,11 @@ let Commentaries = (props) => {
     }
 
     return (
-        <Container className={style.commentaryContainer}>
+        <Container className={"mt-2 justify-content-center"}>
             {props.isAuth ? <NewCommentaryForm onSubmit={addCommentary}/> : null}
-            <Pagination postId={props.postId}/>
+            <Pagination parrentId={props.postId} onChangePage={props.getCommentaries}/>
             {commentaries}
-            <Pagination postId={props.postId}/>
+            <Pagination parrentId={props.postId} onChangePage={props.getCommentaries}/>
         </Container>
     )
 }

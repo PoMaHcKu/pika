@@ -2,15 +2,27 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 
 let LoginForm = (props) => {
-    return(
+    return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field name={"username"} placeholder={"username"} required={true} component={"input"}/>
+            <div className="form-group">
+                <Field className={"form-control"}
+                       name={"username"}
+                       placeholder={"username"}
+                       maxLength={20}
+                       required={true}
+                       component={"input"}/>
             </div>
-            <div>
-                <Field name={"password"} type={"password"} placeholder={"password"} required={true} component={"input"}/>
+            <div className="form-group">
+                <Field
+                    className={"form-control"}
+                    name={"password"}
+                    type={"password"}
+                    placeholder={"password"}
+                    maxLength={35}
+                    required={true}
+                    component={"input"}/>
             </div>
-            <button disabled={props.isProcess}>Sign in</button>
+            <button className={`btn btn-dark`} disabled={props.isProcess}>Sign in</button>
         </form>
     )
 }

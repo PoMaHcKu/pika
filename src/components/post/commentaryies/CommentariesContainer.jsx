@@ -15,6 +15,7 @@ class CommentariesContainer extends React.Component {
         return (
             <Commentaries commentaries={this.props.commentaries}
                           sendComment={this.props.addCommentary}
+                          getCommentaries={this.props.getCommentaries}
                           postId={this.props.postId}
                           isAuth={this.props.isAuth}
             />
