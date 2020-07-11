@@ -55,18 +55,16 @@ export const setOpenedPost = (post) => ({
 
 const postDao = new PostDao();
 
-export const getPosts = (sort, page, size) => {
-    return (dispatch) => {
-        dispatch(changeLoadingStatus(true));
-        postDao
-            .getPosts(sort, page, size)
-            .then(response => {
-                dispatch(changeLoadingStatus(false));
-                dispatch(setPosts(response.data.content));
-                dispatch(setCountPage(response.data.totalPages));
-                dispatch(setCurrentPage(response.data.number));
-            });
-    }
+export const getPosts = (sort, page, size) => dispatch => {
+    dispatch(changeLoadingStatus(true));
+    return postDao
+        .getPosts(sort, page, size)
+        .then(response => {
+            dispatch(changeLoadingStatus(false));
+            dispatch(setPosts(response.data.content));
+            dispatch(setCountPage(response.data.totalPages));
+            dispatch(setCurrentPage(response.data.number));
+        });
 }
 
 export default postReducer;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {getPosts, setOpenedPost} from "../../redux/PostRducer";
+import {getPosts, setOpenedPost} from "../../redux/PostReducer";
 import {connect} from "react-redux";
 import Posts from "./Posts";
 

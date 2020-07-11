@@ -3,6 +3,7 @@ import {Col, Container, Row} from "reactstrap";
 import SectionsContainer from "./sections/SectionsContainer";
 import style from "./Post.module.css"
 import CommentaryContainer from "./commentaryies/CommentariesContainer";
+import GoBack from "../common/go-back/GoBack";
 
 const Post = (props) => {
     return (
@@ -23,6 +24,11 @@ const Post = (props) => {
                 </Col>
                 <Col>
                     {props.post.created}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <GoBack/>
                 </Col>
             </Row>
             <Row>

@@ -3,11 +3,12 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import thankMiddleWare from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
 import authenticationReducer from "./AuthenticationReducer";
-import postReducer from "./PostRducer";
+import postReducer from "./PostReducer";
 import commentaryReducer from "./CommentaryReducer";
 import userReducer from "./UsersReducer";
 import appReducer from "./AppReduser";
 import paginationReducer from "./PaginationReducer";
+import newPostReducer from "./NewPostReducer";
 
 const saveState = (state) => {
     try {
@@ -34,6 +35,7 @@ let reducers = combineReducers(
         registrationState: registrationReducer,
         authenticationState: authenticationReducer,
         postsState: postReducer,
+        newPostState: newPostReducer,
         commentariesState: commentaryReducer,
         usersState: userReducer,
         paginationState: paginationReducer,

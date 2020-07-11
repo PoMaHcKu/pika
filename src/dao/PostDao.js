@@ -8,4 +8,17 @@ export class PostDao extends BaseDao {
             .then(response => response)
             .catch(response => response);
     }
+
+    createPost = (post) => {
+        return this.baseRequest
+            .post("/post", post)
+            .then(response => {
+                debugger;
+                return response
+            })
+            .catch(reason => {
+                debugger;
+                alert(reason);
+            });
+    }
 }
