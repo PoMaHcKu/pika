@@ -15,7 +15,7 @@ const Post = (props) => {
             </Row>
             <Row>
                 <Col className={style.sections}>
-                    <SectionsContainer sections={props.post.sections}/>
+                    <SectionsContainer/>
                 </Col>
             </Row>
             <Row className={style.mark}>

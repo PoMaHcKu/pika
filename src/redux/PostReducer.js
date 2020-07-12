@@ -4,6 +4,7 @@ import {setCountPage, setCurrentPage} from "./PaginationReducer";
 const SET_POSTS = "SET-POSTS";
 const CHANGE_LOAD_STATUS = "LOAD";
 const SET_OPENED_POST = "OPEN";
+const UPDATE_SECTION = "UPDATE-SECTION";
 
 const defaultState = {
     posts: [],
@@ -33,6 +34,19 @@ const postReducer = (state = defaultState, action) => {
                     ]
                 }
             }
+        case UPDATE_SECTION:
+            return {
+                ...state,
+                openedPost: {
+                    ...state.openedPost,
+                    sections: state.openedPost.sections.map(section => {
+                        if (section.id === action.section.id) {
+                            return action.section;
+                        }
+                        return section;
+                    })
+                }
+            }
         default:
             return state;
     }
@@ -55,6 +69,11 @@ export const setOpenedPost = (post) => ({
 
 const postDao = new PostDao();
 
+const updateSection = (section) => ({
+    type: UPDATE_SECTION,
+    section
+})
+
 export const getPosts = (sort, page, size) => dispatch => {
     dispatch(changeLoadingStatus(true));
     return postDao
@@ -65,6 +84,26 @@ export const getPosts = (sort, page, size) => dispatch => {
             dispatch(setCountPage(response.data.totalPages));
             dispatch(setCurrentPage(response.data.number));
         });
+}
+
+export const likeSection = (id) => dispatch => {
+    return postDao
+        .likeSection(id)
+        .then(response => {
+            if (response.data) {
+                dispatch(updateSection(response.data));
+            }
+        })
+}
+
+export const dislikeSection = (id) => dispatch => {
+    return postDao
+        .dislikeSection(id)
+        .then(response => {
+            if (response.data) {
+                dispatch(updateSection(response.data));
+            }
+        })
 }
 
 export default postReducer;

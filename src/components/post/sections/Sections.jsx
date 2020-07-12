@@ -14,7 +14,11 @@ const Sections = (props) => {
                 {section.article}
             </div>
             <div className={section.liked ? style.like : style.dislike}>
-                <img src={section.liked ? like : dislike} alt={"dislike"}/>
+                <img src={section.liked ? like : dislike}
+                     onClick={!section.liked ?
+                         () => props.likeSection(section.id) :
+                         () => props.dislikeSection(section.id)}
+                     alt={"dislike"}/>
                 {section.countLike}
             </div>
         </div>
