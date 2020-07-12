@@ -42,8 +42,11 @@ export const getGenres = () => dispatch => {
 export const createPost = (post) => dispatch => {
     return postDao.createPost(post)
         .then(response => {
-            debugger;
-            return dispatch(setOpenedPost(response.data));
+            if (response && response.data) {
+                dispatch(setOpenedPost(response));
+            } else {
+                alert(response);
+            }
         });
 }
 
