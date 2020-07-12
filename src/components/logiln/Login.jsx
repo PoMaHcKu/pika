@@ -18,7 +18,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="justify-content-center text-light p-2 pb-4">
                 <h3>Sign in</h3>
                 {this.props.isProcess ? <Preloader/> :
                     <LoginForm onSubmit={this.authentication}

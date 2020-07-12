@@ -19,15 +19,16 @@ const registrationReducer = (state = defaultState, action) => {
         case CHANGE_PROCESS:
             return {
                 ...state,
-                isProcess: !state.isProcess
+                isProcess: action.isProcess
             }
         default:
             return state;
     }
 }
 
-export const changeProcessStatus = () => ({
-    type: CHANGE_PROCESS
+export const changeProcessStatus = (isProcess) => ({
+    type: CHANGE_PROCESS,
+    isProcess
 })
 
 const registration = (user) => ({
@@ -39,10 +40,10 @@ const registrationDao = new RegistrationDao();
 
 export const registrationUser = (user) => {
     return (dispatch) => {
-        dispatch(changeProcessStatus());
+        dispatch(changeProcessStatus(true));
         registrationDao.registration(user)
             .then(data => {
-                dispatch(changeProcessStatus());
+                dispatch(changeProcessStatus(false));
                 if (data && data.id != null) {
                     dispatch(registration(data));
                     alert("Successful. Now you can log in.");

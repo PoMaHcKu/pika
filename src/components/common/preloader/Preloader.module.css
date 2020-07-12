@@ -1,10 +1,8 @@
 .preloader {
     -webkit-animation: preloader 1.5s infinite linear;
     -moz-animation: preloader 1.5s infinite linear;
-    -ms-animation: preloader 1.5s infinite linear;
     -o-animation: preloader 1.5s infinite linear;
     animation: preloader 1.5s infinite linear;
-    position: absolute;
     margin: 50px auto;
 }
 

@@ -15,7 +15,7 @@ const Posts = (props) => {
 
     let posts = props.posts.map(post =>
         <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)} key={post.id} >
-            <Row className={`col-12 ${style.post}`}>
+            <Row className={`${style.post} bg-dark text-light mb-2 p-2`}>
                 <Col className={"col-5"}>
                     <Row>
                         <Col className={style.title}>

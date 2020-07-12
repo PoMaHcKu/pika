@@ -1,5 +1,4 @@
 import * as React from "react";
-import {Container} from "reactstrap";
 import NewCommentaryForm from "./new-comment-form/NewCommentaryForm";
 import CommentaryContainer from "./commentary/CommentaryContainer";
 import Pagination from "../../pagination/Pagination";
@@ -19,12 +18,12 @@ let Commentaries = (props) => {
     }
 
     return (
-        <Container className={"mt-2 justify-content-center"}>
+        <div className={"mt-2 justify-content-center"}>
             {props.isAuth ? <NewCommentaryForm onSubmit={addCommentary}/> : null}
             <Pagination parrentId={props.postId} onChangePage={props.getCommentaries}/>
             {commentaries}
             <Pagination parrentId={props.postId} onChangePage={props.getCommentaries}/>
-        </Container>
+        </div>
     )
 }
 

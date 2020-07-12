@@ -1,35 +1,48 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import style from "./Navbar.module.css";
 import {connect} from "react-redux";
 import {logout} from "../../redux/AuthenticationReducer";
+import {Col, Row} from "reactstrap";
 
 const Navbar = (props) => {
     return (
-        <nav className={style.navbar}>
-            <div className={style.item}>
-                <NavLink to={"/main"} activeClassName={style.active}>Main</NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to={"/posts"} activeClassName={style.active}>Posts</NavLink>
-            </div>
-            {props.isAuth ?
-                <div className={style.item}>
-                    <NavLink to={"/logout"} activeClassName={style.active}>
-                        <div onClick={props.logout}>Sign out</div>
-                    </NavLink>
-                </div>
-                :
-                <div>
-                    <div className={style.item}>
-                        <NavLink to="/registration" activeClassName={style.active}>Registration</NavLink>
+        <Row className="mt-1">
+            <Col>
+                <nav className="navbar navbar-expand-sm bg-dark navbar-dark m-0">
+                    <button className="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#collapsibleNavbar">
+                        <span className="navbar-toggler-icon"/>
+                    </button>
+                    <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/main">Main</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/posts">Posts</NavLink>
+                            </li>
+
+                        </ul>
                     </div>
-                    <div className={style.item}>
-                        <NavLink to={"/login"} activeClassName={style.active}>Sign in</NavLink>
-                    </div>
-                </div>
-            }
-        </nav>
+                    {props.isAuth ?
+                        <div className="navbar-nav">
+                            <div className="nav-item">
+                                <NavLink className="nav-link" to="/login" onClick={props.logout}>Sign out</NavLink>
+                            </div>
+                        </div>
+                        :
+                        <div className="navbar-nav">
+                            <div className="nav-item float-right">
+                                <NavLink className="nav-link" to="/registration">Registration</NavLink>
+                            </div>
+                            <div className="nav-item float-right">
+                                <NavLink className="nav-link" to="/login">Sign in</NavLink>
+                            </div>
+                        </div>
+                    }
+                </nav>
+            </Col>
+        </Row>
     )
 }
 
