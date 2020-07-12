@@ -12,7 +12,21 @@
     word-wrap: break-word;
 }
 
-.likes {
+.like, .dislike {
     text-align: center;
-    color: dimgray;
+    margin: 3px;
+}
+
+.like {
+    color: dodgerblue;
+}
+
+.dislike {
+    color: dimgrey;
+}
+
+.dislike img, .like img {
+    width: 25px;
+    margin-right: 6px;
+    margin-bottom: 3px;
 }

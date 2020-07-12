@@ -1,6 +1,8 @@
 import React from "react";
 import {Container} from "reactstrap";
-import style from "./Sections.module.css"
+import style from "./Sections.module.css";
+import like from "../../../resources/pictures/like.png";
+import dislike from "../../../resources/pictures/dislike.png";
 
 const Sections = (props) => {
     let sections = props.sections.map(section =>
@@ -11,7 +13,8 @@ const Sections = (props) => {
             <div className={`${style.article}`}>
                 {section.article}
             </div>
-            <div className={`${style.likes}`}>
+            <div className={section.liked ? style.like : style.dislike}>
+                <img src={section.liked ? like : dislike} alt={"dislike"}/>
                 {section.countLike}
             </div>
         </div>
