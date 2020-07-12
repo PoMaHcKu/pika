@@ -34,6 +34,8 @@
     font: 1em Arial;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: pre-line;
+    word-wrap: break-word;
 }
 
 a {

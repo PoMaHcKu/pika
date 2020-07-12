@@ -8,6 +8,8 @@
 
 .article {
     text-align: left;
+    white-space: pre-line;
+    word-wrap: break-word;
 }
 
 .likes {
