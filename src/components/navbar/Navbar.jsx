@@ -8,7 +8,7 @@ const Navbar = (props) => {
     return (
         <Row className="mt-1">
             <Col>
-                <nav className="navbar navbar-expand-sm bg-dark navbar-dark m-0">
+                <nav className="navbar navbar-expand-sm bg-dark navbar-dark mb-1">
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#collapsibleNavbar">
                         <span className="navbar-toggler-icon"/>
@@ -32,10 +32,10 @@ const Navbar = (props) => {
                         </div>
                         :
                         <div className="navbar-nav">
-                            <div className="nav-item float-right">
+                            <div className="nav-item">
                                 <NavLink className="nav-link" to="/registration">Registration</NavLink>
                             </div>
-                            <div className="nav-item float-right">
+                            <div className="nav-item">
                                 <NavLink className="nav-link" to="/login">Sign in</NavLink>
                             </div>
                         </div>
