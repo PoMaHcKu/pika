@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {createPost, getGenres} from "../../redux/NewPostReducer";
 import NewPostForm from "./NewPostForm";
 import {withRouter} from "react-router-dom";
+import {withoutAuthRedirect} from "../../hoc/WithRedirectToLogin";
 
 class NewPost extends React.Component {
 
@@ -17,6 +18,10 @@ class NewPost extends React.Component {
             title: data.title,
             sections: data.sections,
             genre: data.genre
+        }
+        if (!post.sections) {
+            alert("Count of sections can't be less one!");
+            return;
         }
         this.props.createPost(post);
         this.props.history.push("/post");
@@ -51,5 +56,6 @@ const mapDispatchToProps = {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withRouter
+    withRouter,
+    withoutAuthRedirect
 )(NewPost);

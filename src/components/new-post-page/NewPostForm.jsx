@@ -64,6 +64,7 @@ const NewPostForm = props => {
                    className={"form-control form-control-lg"}
                    component={"input"}
                    placeholder="Post title"
+                   required={true}
                    maxLength={50}
                    minLength={3}/>
             <Field name="description"
@@ -79,10 +80,6 @@ const NewPostForm = props => {
                 {options}
             </Field>
             <div>
-                {/*preview. it will be create after*/}
-                {/*<NavLink to={"/post"}>*/}
-                {/*    <input type={"button"} className={"form-control form-control-sm mt-3 mb-3"} value={"PREVIEW"}/>*/}
-                {/*</NavLink>*/}
                 <button type="submit" className={"btn btn-light border-dark m-1"} disabled={submitting}>
                     CREATE POST
                 </button>
