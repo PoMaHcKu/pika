@@ -20,7 +20,7 @@ class Pagination extends React.Component {
         return (
             <Row>
                 <Col>
-                    <nav>
+                    <nav className="bg-dark text-dark">
                         <ReactPaginate
                             pageCount={this.props.pageCount}
                             forcePage={this.props.currentPage}
@@ -30,12 +30,12 @@ class Pagination extends React.Component {
                             nextLabel={"->"}
                             previousLabel={"<-"}
                             onPageChange={this.handlePageClick}
-                            containerClassName={"pagination justify-content-center m-2"}
+                            containerClassName={"pagination pg-red justify-content-center m-2"}
                             breakClassName={"page-item pt-2"}
                             pageClassName={"page-item"}
                             pageLinkClassName={"page-link"}
                             activeClassName={"active"}
-                            activeLinkClassName={"active bg-dark border-dark"}
+                            activeLinkClassName="active"
                             previousClassName={"page-item"}
                             previousLinkClassName={"page-link"}
                             nextClassName={"page-item"}

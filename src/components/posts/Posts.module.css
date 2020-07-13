@@ -6,21 +6,23 @@
     border: dimgray 1px solid;
     border-radius: 3px;
     min-height: 80px;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .title, .like, .created {
     height: 20px;
     margin: 1px 0 0 0;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .title {
     font: bolder 1.1em Arial;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .like, .created {
-    color: dimgray;
+    color: darkgrey;
     font-size: 0.9em;
 }
 .article {

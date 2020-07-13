@@ -23,11 +23,14 @@
 }
 
 .dislike {
-    color: dimgrey;
+    color: darkgray;
 }
 
 .dislike img, .like img {
     width: 25px;
     margin-right: 6px;
     margin-bottom: 3px;
+}
+.dislike img:active, .like img:active {
+    width: 27px;
 }

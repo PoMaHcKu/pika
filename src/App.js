@@ -30,7 +30,7 @@ class App extends React.Component {
                     <Header/>
                     <Navbar/>
                     <FindPost/>
-                    <Container className="content  bg-dark p-4">
+                    <Container className="content  bg-dark text-light p-4">
                         <Route path={"/registration"} render={() => <RegistrationContainer/>}/>
                         <Route path={"/posts"} render={() => <PostsContainer/>}/>
                         <Route path={"/post"} render={() => <PostContainer/>}/>
