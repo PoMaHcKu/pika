@@ -4,11 +4,12 @@
     border-radius: 10px;
 }
 
-.title, .sections, .mark,.created {
-}
-
 .title {
     font: bolder 1.5em Arial;
+}
+.description {
+    font: italic 1.1em Arial;
+    padding: 10px;
 }
 
 .mark, .created {

@@ -14,6 +14,11 @@ const Post = (props) => {
                 </Col>
             </Row>
             <Row>
+                <Col className={style.description}>
+                    {props.post.description}
+                </Col>
+            </Row>
+            <Row>
                 <Col className={style.sections}>
                     <SectionsContainer/>
                 </Col>

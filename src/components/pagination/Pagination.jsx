@@ -17,8 +17,8 @@ class Pagination extends React.Component {
     }
 
     render() {
-        return (
-            <Row>
+        if (this.props.pageCount > 1) {
+            return <Row>
                 <Col>
                     <nav className="bg-dark text-dark">
                         <ReactPaginate
@@ -35,7 +35,7 @@ class Pagination extends React.Component {
                             pageClassName={"page-item"}
                             pageLinkClassName={"page-link"}
                             activeClassName={"active"}
-                            activeLinkClassName="active"
+                            activeLinkClassName={"active bg-dark border-dark"}
                             previousClassName={"page-item"}
                             previousLinkClassName={"page-link"}
                             nextClassName={"page-item"}
@@ -44,7 +44,8 @@ class Pagination extends React.Component {
                     </nav>
                 </Col>
             </Row>
-        )
+        }
+        return null;
     }
 }
 

@@ -3,10 +3,9 @@ import {Field, FieldArray, reduxForm} from 'redux-form'
 import Row from "reactstrap/es/Row";
 import Col from "reactstrap/es/Col";
 
-const renderField = ({input, label, type, meta: {touched, error}}) => (
+const renderField = ({input, label, type}) => (
     <div>
         <input {...input} type={type} placeholder={label} className={"form-control"}/>
-        {touched && error && <span>{error}</span>}
     </div>
 )
 
@@ -50,7 +49,7 @@ const sections = ({fields}) => (
 )
 
 const NewPostForm = props => {
-    const {handleSubmit, pristine, reset, submitting} = props
+    const {pristine, reset, submitting} = props
 
     let randomKey = 0;
 
@@ -59,7 +58,7 @@ const NewPostForm = props => {
     )
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
             <Field name="title"
                    className={"form-control form-control-lg"}
                    component={"input"}

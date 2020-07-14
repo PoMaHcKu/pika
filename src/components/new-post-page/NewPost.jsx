@@ -16,6 +16,7 @@ class NewPost extends React.Component {
     addPost = (data) => {
         let post = {
             title: data.title,
+            description: data.description,
             sections: data.sections,
             genre: data.genre
         }

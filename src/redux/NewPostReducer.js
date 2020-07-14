@@ -43,7 +43,7 @@ export const createPost = (post) => dispatch => {
     return postDao.createPost(post)
         .then(response => {
             if (response && response.data) {
-                dispatch(setOpenedPost(response));
+                dispatch(setOpenedPost(response.data));
             } else {
                 alert(response);
             }

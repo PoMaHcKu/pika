@@ -6,7 +6,7 @@ import dislike from "../../../resources/pictures/dislike.png";
 
 const Sections = (props) => {
     let sections = props.sections.map(section =>
-        <div key={section.id}>
+        <div key={section.id} className={style.section}>
             <div className={`${style.title}`}>
                 {section.title}
             </div>
