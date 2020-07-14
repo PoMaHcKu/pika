@@ -1,9 +1,11 @@
 import {UserDao} from "../dao/UserDao";
+import {RegistrationDao} from "../dao/RegistrationDao";
+import authenticationReducer from "./AuthenticationReducer";
 
 const SET_PROFILE = "SET-PROFILE";
 
 const defaultState = {
-    user: null,
+    profile: null,
     posts: [],
 }
 
@@ -11,7 +13,7 @@ const profileReducer = (state = defaultState, action) => {
     switch (action.type) {
         case SET_PROFILE:
             return {
-                user: {...action.user},
+                profile: {...action.user},
                 posts: JSON.stringify(JSON.parse(action.user.posts)),
             }
         default:
@@ -27,6 +29,7 @@ const setProfile = (user) => ({
 const userDao = new UserDao();
 
 export const getProfile = (id) => dispatch => {
+    alert(id);
     userDao.getUser(id)
         .then(response => {
             dispatch(setProfile(response.data))
