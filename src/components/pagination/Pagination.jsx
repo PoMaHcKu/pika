@@ -6,10 +6,6 @@ import {getCommentaries} from "../../redux/CommentaryReducer";
 
 class Pagination extends React.Component {
 
-    componentDidMount() {
-        this.props.onChangePage(this.props.sort, 0, this.props.size, this.props.parrentId);
-    }
-
     handlePageClick = (data) => {
         this.setState({currentPage: data.selected, offset: this.props.pageCount}, () => {
             this.props.onChangePage(this.props.sort, data.selected, this.props.size, this.props.parrentId);

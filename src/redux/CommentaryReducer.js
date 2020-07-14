@@ -72,7 +72,7 @@ const setAuthor = (commentaryId, user) => ({
 const commentaryDao = new CommentaryDao();
 const userDao = new UserDao();
 
-export const getCommentaries = (sort, page, size, postId) => dispatch => {
+export const getCommentaries = (sort = "created", page = 0, size = 10, postId) => dispatch => {
     dispatch(changeLoadingStatus(true));
     commentaryDao.getCommentaries(sort, page, size, postId)
         .then(response => {

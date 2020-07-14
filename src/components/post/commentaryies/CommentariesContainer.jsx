@@ -7,6 +7,10 @@ import {WithCommentarySocket} from "../../../hoc/WithCommentarySocket";
 
 class CommentariesContainer extends React.Component {
 
+    componentDidMount() {
+        this.props.getCommentaries(undefined, undefined, undefined, this.props.postId);
+    }
+
     render() {
         return (
             <Commentaries commentaries={this.props.commentaries}
