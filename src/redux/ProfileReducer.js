@@ -3,7 +3,7 @@ import {UserDao} from "../dao/UserDao";
 const SET_PROFILE = "SET-PROFILE";
 
 const defaultState = {
-    profile: null,
+    userProfile: null,
     posts: [],
 }
 
@@ -11,7 +11,7 @@ const profileReducer = (state = defaultState, action) => {
     switch (action.type) {
         case SET_PROFILE:
             return {
-                profile: {
+                userProfile: {
                     username: action.user.username,
                     email: action.user.email
                 },

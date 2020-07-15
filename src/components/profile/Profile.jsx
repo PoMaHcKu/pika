@@ -1,14 +1,14 @@
 import {Col, Row} from "react-bootstrap";
 import React from "react";
 
-const Profile = (props) => {
+let Profile = (props) => {
     return (
         <Row>
             <Col>
-                <h3>{props.profile.username}</h3>
+                <h3>{props.userProfile.username}</h3>
             </Col>
             <Col>
-                <h5>{props.profile.email}</h5>
+                <h5>{props.userProfile.email}</h5>
             </Col>
         </Row>
     )
