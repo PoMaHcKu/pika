@@ -30,7 +30,7 @@ const setProfile = (user) => ({
 const userDao = new UserDao();
 
 export const getProfile = (id) => dispatch => {
-    userDao.getUser(id)
+    return userDao.getUser(id)
         .then(response => {
             dispatch(setProfile(response.data))
         });

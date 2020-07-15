@@ -13,23 +13,21 @@ class ProfileContainer extends React.Component {
             if (!this.props.id) {
                 return this.props.history.push("/login");
             } else {
-                userId = this.props.userId;
+                userId = this.props.id;
             }
         }
         this.props.getProfile(userId);
     }
 
     render() {
-        return (
-            <Profile profile={this.props.profile}/>
-        )
+        return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
 
 const mapStateToProps = (state) => ({
     profile: state.profileState.profile,
     id: state.authenticationState.authenticatedUser ?
-        state.authenticationState.authenticatedUser : false
+        state.authenticationState.authenticatedUser.id : false
 })
 
 const mapDispatchToProps = {
