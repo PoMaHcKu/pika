@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {createPost, getGenres} from "../../redux/NewPostReducer";
 import NewPostForm from "./NewPostForm";
 import {withRouter} from "react-router-dom";
-import {withoutAuthRedirect} from "../../hoc/WithRedirectToLogin";
+import {withoutAuthRedirect} from "../../hoc/WithoutAuthRedirect";
 
 class NewPost extends React.Component {
 

@@ -66,6 +66,10 @@ export const login = (user) => dispatch => {
     authenticatedDao.login(user)
         .then(() => {
             dispatch(authenticate());
+        })
+        .catch(() => {
+            dispatch(changeProcessStatus(false));
+            alert("Unsuccessful")
         });
 }
 
