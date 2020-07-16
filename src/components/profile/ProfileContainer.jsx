@@ -14,7 +14,6 @@ class ProfileContainer extends React.Component {
         if (!id) {
             id = this.props.authenticatedUser.id;
         }
-        debugger;
         this.props.getProfile(id);
     }
 
@@ -23,7 +22,7 @@ class ProfileContainer extends React.Component {
             <Container>
                 <Row>
                     <Col>
-                        <Profile userProfile={this.props.userProfile}/>
+                        {this.props.isLoading ? null : <Profile userProfile={this.props.userProfile}/>}
                     </Col>
                 </Row>
                 <Row>
@@ -35,7 +34,8 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     userProfile: state.profileState.userProfile,
-    authenticatedUser: state.authenticationState.authenticatedUser
+    authenticatedUser: state.authenticationState.authenticatedUser,
+    isLoading: state.profileState.isLoading
 })
 const mapDispatchToProps = {
     getProfile,
