@@ -13,7 +13,6 @@ import {initializeApp} from "./redux/AppReduser";
 import Preloader from "./components/common/preloader/Preloader";
 import NewPost from "./components/new-post-page/NewPost";
 import Search from "./components/find/Search";
-import ProfileContainer from "./components/profile/ProfileContainer";
 
 class App extends React.Component {
 
@@ -33,7 +32,6 @@ class App extends React.Component {
                     <Search/>
                     <Container className="content  bg-dark text-light p-4">
                         <Route path={"/registration"} render={() => <RegistrationContainer/>}/>
-                        <Route path={"/profile"} render={() => <ProfileContainer/>}/>
                         <Route path={"/posts"} render={() => <PostsContainer/>}/>
                         <Route path={"/post"} render={() => <PostContainer/>}/>
                         <Route path={"/login"} render={() => <Login/>}/>

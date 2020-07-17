@@ -14,7 +14,7 @@ const Posts = (props) => {
     }
 
     let posts = props.posts.map(post =>
-        <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)} key={post.id} >
+        <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)} key={post.id}>
             <Row className={`${style.post} bg-dark text-light mb-2 p-2`}>
                 <Col className={"col-5"}>
                     <Row>
@@ -36,6 +36,13 @@ const Posts = (props) => {
                 <Col className={`col-7`}>
                     <Sections sections={post.sections}/>
                 </Col>
+                <Row className='col-auto'>
+                    <Col>
+                        {post.tags.map(tag =>
+                            <span className={style.tag}>{tag} </span>
+                        )}
+                    </Col>
+                </Row>
             </Row>
         </NavLink>
     )

@@ -21,7 +21,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.like, .created {
+.like, .created, .tag {
     color: darkgrey;
     font-size: 0.9em;
 }
@@ -42,4 +42,16 @@ a {
 
 a:hover {
     text-decoration: none;
+}
+
+.tag {
+    border: lightgrey 1px solid;
+    border-radius: 7px;
+    padding: 0 4px;
+    margin-right: 5px;
+}
+
+.tag:hover {
+    color: lightgrey;
+    border-color: lightgrey;
 }
