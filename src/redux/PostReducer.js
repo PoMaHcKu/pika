@@ -106,4 +106,14 @@ export const dislikeSection = (id) => dispatch => {
         })
 }
 
+export const getByTag = (tag) => dispatch => {
+    return postDao
+        .getByTag(tag)
+        .then(response => {
+            if (response.data) {
+                dispatch(setPosts(response.data.content));
+            }
+        })
+}
+
 export default postReducer;

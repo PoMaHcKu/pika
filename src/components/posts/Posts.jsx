@@ -39,7 +39,9 @@ const Posts = (props) => {
                 <Row className='col-auto'>
                     <Col>
                         {post.tags.map(tag =>
-                            <span className={style.tag}>{tag} </span>
+                            <NavLink to={"/posts"} key={tag}>
+                                <span className={style.tag} onClick={() => props.getByTag(tag)}>{tag} </span>
+                            </NavLink>
                         )}
                     </Col>
                 </Row>

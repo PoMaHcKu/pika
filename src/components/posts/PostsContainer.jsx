@@ -1,5 +1,5 @@
 import * as React from "react";
-import {getPosts, setOpenedPost} from "../../redux/PostReducer";
+import {getByTag, getPosts, setOpenedPost} from "../../redux/PostReducer";
 import {connect} from "react-redux";
 import Posts from "./Posts";
 
@@ -15,6 +15,7 @@ class PostsContainer extends React.Component {
                    getPosts={this.props.getPosts}
                    isLoading={this.props.isLoading}
                    setOpendPost={this.props.setOpenedPost}
+                   getByTag={this.props.getByTag}
             />
         )
     }
@@ -27,7 +28,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getPosts,
-    setOpenedPost
+    setOpenedPost,
+    getByTag
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);
