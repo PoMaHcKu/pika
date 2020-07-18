@@ -1,6 +1,4 @@
 import {UserDao} from "../dao/UserDao";
-import {RegistrationDao} from "../dao/RegistrationDao";
-import authenticationReducer from "./AuthenticationReducer";
 
 const SET_PROFILE = "SET-PROFILE";
 
