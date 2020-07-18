@@ -14,39 +14,39 @@ const Posts = (props) => {
     }
 
     let posts = props.posts.map(post =>
-        <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)} key={post.id}>
-            <Row className={`${style.post} bg-dark text-light mb-2 p-2`}>
-                <Col className={"col-5"}>
-                    <Row>
-                        <Col className={style.title}>
+        <Row className={`${style.post} bg-dark text-light mb-2 p-2`} key={post.id}>
+            <Col className={"col-5"}>
+                <Row>
+                    <Col className={style.title}>
+                        <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)}>
                             <span>{post.title}</span>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={style.like}>
-                            <span>Like: {post.mark}</span>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={style.created}>
-                            <span>Created: {post.created}</span>
-                        </Col>
-                    </Row>
-                </Col>
-                <Col className={`col-7`}>
-                    <Sections sections={post.sections}/>
-                </Col>
-                <Row className='col-auto'>
-                    <Col>
-                        {post.tags.map(tag =>
-                            <NavLink to={"/posts"} key={tag}>
-                                <span className={style.tag} onClick={() => props.getByTag(tag)}>{tag} </span>
-                            </NavLink>
-                        )}
+                        </NavLink>
                     </Col>
                 </Row>
+                <Row>
+                    <Col className={style.like}>
+                        <span>Like: {post.mark}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className={style.created}>
+                        <span>Created: {post.created}</span>
+                    </Col>
+                </Row>
+            </Col>
+            <Col className={`col-7`}>
+                <Sections sections={post.sections}/>
+            </Col>
+            <Row className='col-auto'>
+                <Col>
+                    {post.tags.map(tag =>
+                        <NavLink to={"/posts"} key={tag}>
+                            <span className={style.tag} onClick={() => props.getByTag(tag)}>{tag} </span>
+                        </NavLink>
+                    )}
+                </Col>
             </Row>
-        </NavLink>
+        </Row>
     )
 
     return (
