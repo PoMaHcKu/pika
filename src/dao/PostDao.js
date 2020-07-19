@@ -11,6 +11,10 @@ export class PostDao extends BaseDao {
         return this.baseRequest
             .get(`post/tags?tag=${tag}&page=${page}&size=${size}&sortBy=${sort}`);
     }
+    getByGenre = (genre, sort = "created", page = 0, size = 7) => {
+        return this.baseRequest
+            .get(`post/genre?genre=${genre}&page=${page}&size=${size}&sortBy=${sort}`);
+    }
 
     createPost = (post) => {
         return this.baseRequest
