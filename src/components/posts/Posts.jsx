@@ -25,7 +25,9 @@ const Posts = (props) => {
                 </NavLink>
                 <Row>
                     <Col className={style.like}>
-                        <span>{post.genre}</span>
+                        <NavLink to={"/posts"}>
+                            <span onClick={() => props.getByGenre(post.genre)}>{post.genre}</span>
+                        </NavLink>
                     </Col>
                 </Row>
                 <Row>

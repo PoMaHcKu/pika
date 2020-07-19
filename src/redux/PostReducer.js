@@ -115,5 +115,14 @@ export const getByTag = (tag) => dispatch => {
             }
         })
 }
+export const getByGenre = (genre) => dispatch => {
+    return postDao
+        .getByGenre(genre)
+        .then(response => {
+            if (response.data) {
+                dispatch(setPosts(response.data.content));
+            }
+        })
+}
 
 export default postReducer;
