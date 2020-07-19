@@ -6,6 +6,7 @@ import SortButtons from "./sort-button/SortButtons";
 import Sections from "./section/Sections";
 import {NavLink} from "react-router-dom";
 import Pagination from "../pagination/Pagination";
+import Genre from "./genre/Genre";
 
 const Posts = (props) => {
 
@@ -26,7 +27,7 @@ const Posts = (props) => {
                 <Row>
                     <Col className={style.like}>
                         <NavLink to={"/posts"}>
-                            <span onClick={() => props.getByGenre(post.genre)}>{post.genre}</span>
+                            <Genre genre={post.genre} getByGenre={props.getByGenre}/>
                         </NavLink>
                     </Col>
                 </Row>
