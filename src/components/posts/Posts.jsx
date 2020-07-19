@@ -7,6 +7,7 @@ import Sections from "./section/Sections";
 import {NavLink} from "react-router-dom";
 import Pagination from "../pagination/Pagination";
 import Genre from "./genre/Genre";
+import Tags from "./tags/Tags";
 
 const Posts = (props) => {
 
@@ -47,11 +48,7 @@ const Posts = (props) => {
             </Col>
             <Row className='col-auto'>
                 <Col>
-                    {post.tags.map(tag =>
-                        <NavLink to={"/posts"} key={tag}>
-                            <span className={style.tag} onClick={() => props.getByTag(tag)}>{tag} </span>
-                        </NavLink>
-                    )}
+                    <Tags tags={post.tags} getByTag={props.getByTag}/>
                 </Col>
             </Row>
         </Row>
