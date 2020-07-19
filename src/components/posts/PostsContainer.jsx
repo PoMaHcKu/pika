@@ -6,7 +6,9 @@ import Posts from "./Posts";
 class PostsContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getPosts();
+        if (this.props.posts === null) {
+            this.props.getPosts();
+        }
     }
 
     render() {
