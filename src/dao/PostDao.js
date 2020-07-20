@@ -18,16 +18,21 @@ export class PostDao extends BaseDao {
 
     createPost = (post) => {
         return this.baseRequest
-            .post("/post", post);
+            .post("post", post);
     }
 
     likeSection = (id) => {
         return this.baseRequest
-            .get(`/section/${id}`);
+            .get(`section/${id}`);
     }
 
     dislikeSection = (id) => {
         return this.baseRequest
-            .delete(`/section/${id}`);
+            .delete(`section/${id}`);
+    }
+
+    searchPost = (text) => {
+        return this.baseRequest
+            .get(`post/search/${text}`);
     }
 }

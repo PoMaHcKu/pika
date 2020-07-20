@@ -125,4 +125,14 @@ export const getByGenre = (genre) => dispatch => {
         })
 }
 
+export const searchPosts = (text) => dispatch => {
+    dispatch(changeLoadingStatus(true));
+    return postDao
+        .searchPost(text)
+        .then(response => {
+            dispatch(changeLoadingStatus(false));
+            dispatch(setPosts(response.data));
+        })
+}
+
 export default postReducer;
