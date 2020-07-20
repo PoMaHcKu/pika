@@ -9,6 +9,7 @@ const Search = (props) => {
     let search = (form) => {
         props.search(form.text);
         props.history.push("/posts");
+        form.text = '';
     }
 
     return (
