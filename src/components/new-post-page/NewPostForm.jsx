@@ -78,6 +78,11 @@ const NewPostForm = props => {
                    className={"form-control"}>
                 {options}
             </Field>
+            <br/>
+            <Field name={"tags"}
+                   component={"input"}
+                   className={"form-control"}
+            placeholder={"Type several tags separated by commas"}/>
             <div>
                 <button type="submit" className={"btn btn-light border-dark m-1"} disabled={submitting}>
                     CREATE POST

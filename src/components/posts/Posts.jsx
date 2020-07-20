@@ -10,7 +10,6 @@ import Genre from "./genre/Genre";
 import Tags from "./tags/Tags";
 
 const Posts = (props) => {
-
     const selectPost = (post) => {
         props.setOpendPost(post);
     }

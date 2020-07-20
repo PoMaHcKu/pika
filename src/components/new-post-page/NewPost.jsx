@@ -18,7 +18,8 @@ class NewPost extends React.Component {
             title: data.title,
             description: data.description,
             sections: data.sections,
-            genre: data.genre
+            genre: data.genre,
+            tags: data.tags.split(",")
         }
         if (!post.sections) {
             alert("Count of sections can't be less one!");
