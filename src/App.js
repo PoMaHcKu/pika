@@ -13,6 +13,7 @@ import {initializeApp} from "./redux/AppReduser";
 import Preloader from "./components/common/preloader/Preloader";
 import NewPost from "./components/new-post-page/NewPost";
 import Search from "./components/find/Search";
+import {searchPosts} from "./redux/PostReducer";
 
 class App extends React.Component {
 
@@ -29,7 +30,7 @@ class App extends React.Component {
                 <div>
                     <Header/>
                     <Navbar/>
-                    <Search/>
+                    <Search search={this.props.searchPosts}/>
                     <Container className="content  bg-dark text-light p-4">
                         <Route path={"/registration"} render={() => <RegistrationContainer/>}/>
                         <Route path={"/posts"} render={() => <PostsContainer/>}/>
@@ -49,6 +50,6 @@ const mapStateToProps = (state) => ({
 })
 
 export default compose(
-    connect(mapStateToProps, {initializeApp}),
+    connect(mapStateToProps, {initializeApp, searchPosts}),
     withRouter
 )(App);

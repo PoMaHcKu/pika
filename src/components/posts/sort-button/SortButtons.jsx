@@ -16,6 +16,9 @@ let SortButtons = (props) => {
             <Col>
                 <Button lable={"LATEST"} onClick={() => props.getPosts(LATEST)}/>
             </Col>
+            <Col>
+                <Button lable={"CLEAR SEARCH"} onClick={() => props.getPosts()}/>
+            </Col>
         </Row>
     )
 

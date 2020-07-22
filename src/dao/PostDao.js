@@ -11,19 +11,28 @@ export class PostDao extends BaseDao {
         return this.baseRequest
             .get(`post/tags?tag=${tag}&page=${page}&size=${size}&sortBy=${sort}`);
     }
+    getByGenre = (genre, sort = "created", page = 0, size = 7) => {
+        return this.baseRequest
+            .get(`post/genre?genre=${genre}&page=${page}&size=${size}&sortBy=${sort}`);
+    }
 
     createPost = (post) => {
         return this.baseRequest
-            .post("/post", post);
+            .post("post", post);
     }
 
     likeSection = (id) => {
         return this.baseRequest
-            .get(`/section/${id}`);
+            .get(`section/${id}`);
     }
 
     dislikeSection = (id) => {
         return this.baseRequest
-            .delete(`/section/${id}`);
+            .delete(`section/${id}`);
+    }
+
+    searchPost = (text) => {
+        return this.baseRequest
+            .get(`post/search/${text}`);
     }
 }

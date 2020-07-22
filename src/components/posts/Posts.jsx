@@ -6,10 +6,10 @@ import SortButtons from "./sort-button/SortButtons";
 import Sections from "./section/Sections";
 import {NavLink} from "react-router-dom";
 import Pagination from "../pagination/Pagination";
-import Tags from "./tag/Tags";
+import Genre from "./genre/Genre";
+import Tags from "./tags/Tags";
 
 const Posts = (props) => {
-
     const selectPost = (post) => {
         props.setOpendPost(post);
     }
@@ -17,10 +17,17 @@ const Posts = (props) => {
     let posts = props.posts.map(post =>
         <Row className={`${style.post} bg-dark text-light mb-2 p-2`} key={post.id}>
             <Col className={"col-5"}>
-                <Row>
-                    <Col className={style.title}>
-                        <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)}>
+                <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)}>
+                    <Row>
+                        <Col className={style.title}>
                             <span>{post.title}</span>
+                        </Col>
+                    </Row>
+                </NavLink>
+                <Row>
+                    <Col className={style.like}>
+                        <NavLink to={"/posts"}>
+                            <Genre genre={post.genre} getByGenre={props.getByGenre}/>
                         </NavLink>
                     </Col>
                 </Row>

@@ -1,12 +1,14 @@
 import * as React from "react";
-import {getByTag, getPosts, setOpenedPost} from "../../redux/PostReducer";
+import {getByGenre, getByTag, getPosts, setOpenedPost} from "../../redux/PostReducer";
 import {connect} from "react-redux";
 import Posts from "./Posts";
 
 class PostsContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getPosts();
+        if (this.props.posts.length === 0) {
+            this.props.getPosts();
+        }
     }
 
     render() {
@@ -16,6 +18,7 @@ class PostsContainer extends React.Component {
                    isLoading={this.props.isLoading}
                    setOpendPost={this.props.setOpenedPost}
                    getByTag={this.props.getByTag}
+                   getByGenre={this.props.getByGenre}
             />
         )
     }
@@ -29,7 +32,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     getPosts,
     setOpenedPost,
-    getByTag
+    getByTag,
+    getByGenre
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);

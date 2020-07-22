@@ -9,7 +9,6 @@ import userReducer from "./UsersReducer";
 import appReducer from "./AppReduser";
 import paginationReducer from "./PaginationReducer";
 import newPostReducer from "./NewPostReducer";
-import profileReducer from "./ProfileReducer";
 
 const saveState = (state) => {
     try {
@@ -40,7 +39,6 @@ let reducers = combineReducers(
         commentariesState: commentaryReducer,
         usersState: userReducer,
         paginationState: paginationReducer,
-        profileState: profileReducer,
         form: formReducer
     }
 );
@@ -52,4 +50,3 @@ export let store = createStore(reducers, oldState, applyMiddleware(thankMiddleWa
 store.subscribe(() => {
     saveState(store.getState());
 });
-

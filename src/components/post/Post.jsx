@@ -4,6 +4,9 @@ import SectionsContainer from "./sections/SectionsContainer";
 import style from "./Post.module.css"
 import CommentaryContainer from "./commentaryies/CommentariesContainer";
 import GoBack from "../common/go-back/GoBack";
+import Tags from "../posts/tags/Tags";
+import {NavLink} from "react-router-dom";
+import Genre from "../posts/genre/Genre";
 
 const Post = (props) => {
     return (
@@ -21,6 +24,18 @@ const Post = (props) => {
             <Row>
                 <Col className={style.sections}>
                     <SectionsContainer/>
+                </Col>
+            </Row>
+            <Row>
+                <Col className={style.genre}>
+                    <NavLink to={"/posts"}>
+                        <Genre genre={props.post.genre} getByGenre={props.getByGenre}/>
+                    </NavLink>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Tags tags={props.post.tags} getByTag={props.getByTag}/>
                 </Col>
             </Row>
             <Row className={style.mark}>
