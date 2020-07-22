@@ -2,6 +2,7 @@ import React from 'react'
 import {Field, FieldArray, reduxForm} from 'redux-form'
 import Row from "reactstrap/es/Row";
 import Col from "reactstrap/es/Col";
+import {UploadImage} from "./UploadField";
 
 const renderField = ({input, label, type}) => (
     <div>
@@ -32,12 +33,13 @@ const sections = ({fields}) => (
                        rows={3}
                        component={"textarea"}
                        maxLength={2000}
-                       required={true}
                        minLength={3}/>
                 <Field type={"hidden"}
                        name={`${section}.placeNumber`}
                        value={index}
                        component={"input"}/>
+                <Field name={`${section}.imageId`}
+                       component={UploadImage}/>
             </div>
         ))}
         <div>
@@ -82,7 +84,7 @@ const NewPostForm = props => {
             <Field name={"tags"}
                    component={"input"}
                    className={"form-control"}
-            placeholder={"Type several tags separated by commas"}/>
+                   placeholder={"Type several tags separated by commas"}/>
             <div>
                 <button type="submit" className={"btn btn-light border-dark m-1"} disabled={submitting}>
                     CREATE POST
