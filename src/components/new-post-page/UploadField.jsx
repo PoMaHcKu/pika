@@ -23,9 +23,10 @@ export const UploadImage = ({input}) => {
     return (
         <div>
             <input type="hidden" {...input}/>
-            {input.value ? <CloudinaryContext cloudName="dimo51hgd">
-                <Image publicId={input.value}/>
-            </CloudinaryContext> : null}
+            {input.value ?
+                <CloudinaryContext cloudName="dimo51hgd">
+                    <Image publicId={input.value}/>
+                </CloudinaryContext> : null}
             <button className="btn btn-light border-dark"
                     type="button"
                     onClick={() => showWidget(cloudinaryWidget)}>ADD PHOTO
