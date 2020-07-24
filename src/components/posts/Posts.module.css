@@ -6,6 +6,9 @@
     border: dimgray 1px solid;
     border-radius: 3px;
     min-height: 80px;
+    max-height: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .title, .like, .created {
@@ -25,14 +28,18 @@
     color: darkgrey;
     font-size: 0.9em;
 }
-.article {
-    max-height: 70px;
+.sectionTitle {
+    max-height: 150px;
     font: 1em Arial;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: pre-line;
     word-wrap: break-word;
+}
+
+img {
+    padding: 5px 0;
 }
 
 a {
