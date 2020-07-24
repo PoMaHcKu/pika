@@ -41,15 +41,15 @@ const Posts = (props) => {
                         <span>Created: {post.created}</span>
                     </Col>
                 </Row>
+                <Row>
+                    <Col className={style.tagContainer}>
+                        <Tags tags={post.tags} getByTag={props.getByTag}/>
+                    </Col>
+                </Row>
             </Col>
             <Col className={`col-7`}>
                 <Sections sections={post.sections}/>
             </Col>
-            <Row className='col-auto'>
-                <Col>
-                    <Tags tags={post.tags} getByTag={props.getByTag}/>
-                </Col>
-            </Row>
         </Row>
     )
 

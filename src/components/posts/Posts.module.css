@@ -28,6 +28,7 @@
     color: darkgrey;
     font-size: 0.9em;
 }
+
 .sectionTitle {
     max-height: 150px;
     font: 1em Arial;
@@ -50,6 +51,10 @@ a {
 a:hover {
     text-decoration: none;
     color: lightgrey;
+}
+
+.tagContainer {
+    text-align: left;
 }
 
 .tag {
