@@ -13,7 +13,7 @@ export const UploadImage = ({input}) => {
     const cloudinaryWidget = window.cloudinary.createUploadWidget({
         cloudName: "dimo51hgd",
         uploadPreset: "qozmcynm",
-        maxWidth: 880
+        maxImageWidth: 880
     }, (err, response) => checkUploadedResult(response));
 
     const showWidget = (widget) => {

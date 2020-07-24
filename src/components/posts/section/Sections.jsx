@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Col, Row} from "reactstrap";
 import style from "../Posts.module.css";
-import {CloudinaryContext, Image, Transformation} from "cloudinary-react";
+import {CloudinaryContext, Image} from "cloudinary-react";
 
 let Sections = (props) => {
     let sections = props.sections.map(section => {
@@ -11,9 +11,7 @@ let Sections = (props) => {
                         {section.title}
                         {section.imageId ?
                             <CloudinaryContext cloudName="dimo51hgd">
-                                <Image publicId={section.imageId}>
-                                    <Transformation width="150" height="150" crop="fill" effect="sepia" radius="20"/>
-                                </Image>
+                                <Image publicId={section.imageId}/>
                             </CloudinaryContext> :
                             section.article}
                     </Col>
