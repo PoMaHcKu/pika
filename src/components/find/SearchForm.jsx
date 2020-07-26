@@ -9,6 +9,8 @@ const SearchForm = (props) => {
                     <Field className="form-control form-control-sm bg-dark text-light"
                            name="text"
                            placeholder="Search..."
+                           minLength={4}
+                           required
                            component="input"/>
                 </div>
                 <div className="col-xs-3 col-sm-2">
