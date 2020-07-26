@@ -5,6 +5,7 @@ import Tags from "../posts/tags/Tags";
 import {Col, Row} from "reactstrap";
 import PostsContainer from "../posts/PostsContainer";
 import {Button} from "../common/button/Button";
+import {getByTag} from "../../redux/PostReducer";
 
 class MainPageContainer extends React.Component {
 
@@ -22,7 +23,7 @@ class MainPageContainer extends React.Component {
                 </Row>
                 <Row>
                     <Col className="p-5 border border-light">
-                        <Tags tags={this.props.tags}/>
+                        <Tags getByTag={this.props.getByTag} tags={this.props.tags}/>
                     </Col>
                 </Row>
                 <Row>
@@ -52,6 +53,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getTags,
+    getByTag,
     getAllTags
 }
 
