@@ -135,4 +135,18 @@ export const searchPosts = (text) => dispatch => {
         })
 }
 
+export const ratePost = (mark, postId) => dispatch => {
+    return postDao
+        .ratePost(mark, postId)
+        .then(() => dispatch(getPost(postId)))
+}
+
+export const getPost = (postId) => dispatch => {
+    return postDao
+        .getPost(postId)
+        .then(response => {
+            dispatch(setOpenedPost(response.data))
+        })
+}
+
 export default postReducer;

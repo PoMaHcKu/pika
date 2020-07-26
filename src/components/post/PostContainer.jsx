@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Col, Row} from "reactstrap";
 import Post from "./Post";
-import {getByGenre, getByTag} from "../../redux/PostReducer";
+import {getByGenre, getByTag, ratePost} from "../../redux/PostReducer";
 import Preloader from "../common/preloader/Preloader";
 import {connect} from "react-redux";
 
@@ -13,7 +13,8 @@ const PostContainer = (props) => {
                 <Col>
                     <Post post={props.post}
                           getByGenre={props.getByGenre}
-                          getByTag={props.getByTag}/>
+                          getByTag={props.getByTag}
+                          rate={props.ratePost}/>
                 </Col>
             </Row>
     )
@@ -26,7 +27,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getByGenre,
-    getByTag
+    getByTag,
+    ratePost
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

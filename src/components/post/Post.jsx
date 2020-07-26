@@ -7,6 +7,7 @@ import GoBack from "../common/go-back/GoBack";
 import Tags from "../posts/tags/Tags";
 import {NavLink} from "react-router-dom";
 import Genre from "../posts/genre/Genre";
+import Rating from "./rating/Rating";
 
 const Post = (props) => {
     return (
@@ -44,6 +45,11 @@ const Post = (props) => {
                 </Col>
                 <Col>
                     {props.post.created}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Rating currentRate={props.post.rating} postId={props.post.id}/>
                 </Col>
             </Row>
             <Row>

@@ -2,7 +2,7 @@ import * as React from "react";
 import {Col, Row} from "reactstrap";
 import {Button} from "../../common/button/Button";
 
-const POPULAR = "mark";
+const POPULAR = "rating";
 const LATEST = "updated";
 
 
