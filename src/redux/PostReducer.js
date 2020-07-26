@@ -1,10 +1,11 @@
-import {PostDao} from "../dao/PostDao";
-import {setCountPage, setCurrentPage} from "./PaginationReducer";
+import {PostDao} from "../dao/PostDao"
+import {setCountPage, setCurrentPage} from "./PaginationReducer"
+import {SectionDao} from "../dao/SectionDao"
 
-const SET_POSTS = "SET-POSTS";
-const CHANGE_LOAD_STATUS = "LOAD";
-const SET_OPENED_POST = "OPEN";
-const UPDATE_SECTION = "UPDATE-SECTION";
+const SET_POSTS = "SET-POSTS"
+const CHANGE_LOAD_STATUS = "LOAD"
+const SET_OPENED_POST = "OPEN"
+const UPDATE_SECTION = "UPDATE-SECTION"
 
 const defaultState = {
     posts: [],
@@ -41,14 +42,14 @@ const postReducer = (state = defaultState, action) => {
                     ...state.openedPost,
                     sections: state.openedPost.sections.map(section => {
                         if (section.id === action.section.id) {
-                            return action.section;
+                            return action.section
                         }
-                        return section;
+                        return section
                     })
                 }
             }
         default:
-            return state;
+            return state
     }
 }
 
@@ -67,7 +68,8 @@ export const setOpenedPost = (post) => ({
     post
 })
 
-const postDao = new PostDao();
+const postDao = new PostDao()
+const sectionDao = new SectionDao()
 
 const updateSection = (section) => ({
     type: UPDATE_SECTION,
@@ -75,15 +77,15 @@ const updateSection = (section) => ({
 })
 
 export const getPosts = (sort, page, size) => dispatch => {
-    dispatch(changeLoadingStatus(true));
+    dispatch(changeLoadingStatus(true))
     return postDao
         .getPosts(sort, page, size)
         .then(response => {
-            dispatch(changeLoadingStatus(false));
-            dispatch(setPosts(response.data.content));
-            dispatch(setCountPage(response.data.totalPages));
-            dispatch(setCurrentPage(response.data.number));
-        });
+            dispatch(changeLoadingStatus(false))
+            dispatch(setPosts(response.data.content))
+            dispatch(setCountPage(response.data.totalPages))
+            dispatch(setCurrentPage(response.data.number))
+        })
 }
 
 export const likeSection = (id) => dispatch => {
@@ -91,7 +93,7 @@ export const likeSection = (id) => dispatch => {
         .likeSection(id)
         .then(response => {
             if (response.data) {
-                dispatch(updateSection(response.data));
+                dispatch(getSection(response.data.id))
             }
         })
 }
@@ -101,7 +103,7 @@ export const dislikeSection = (id) => dispatch => {
         .dislikeSection(id)
         .then(response => {
             if (response.data) {
-                dispatch(updateSection(response.data));
+                dispatch(getSection(response.data.id))
             }
         })
 }
@@ -111,7 +113,7 @@ export const getByTag = (tag) => dispatch => {
         .getByTag(tag)
         .then(response => {
             if (response.data) {
-                dispatch(setPosts(response.data.content));
+                dispatch(setPosts(response.data.content))
             }
         })
 }
@@ -120,18 +122,18 @@ export const getByGenre = (genre) => dispatch => {
         .getByGenre(genre)
         .then(response => {
             if (response.data) {
-                dispatch(setPosts(response.data.content));
+                dispatch(setPosts(response.data.content))
             }
         })
 }
 
 export const searchPosts = (text) => dispatch => {
-    dispatch(changeLoadingStatus(true));
+    dispatch(changeLoadingStatus(true))
     return postDao
         .searchPost(text)
         .then(response => {
-            dispatch(changeLoadingStatus(false));
-            dispatch(setPosts(response.data));
+            dispatch(changeLoadingStatus(false))
+            dispatch(setPosts(response.data))
         })
 }
 
@@ -149,4 +151,10 @@ export const getPost = (postId) => dispatch => {
         })
 }
 
-export default postReducer;
+export const getSection = id => dispatch => {
+    return sectionDao
+        .getSection(id)
+        .then(response => dispatch(updateSection(response.data)))
+}
+
+export default postReducer
