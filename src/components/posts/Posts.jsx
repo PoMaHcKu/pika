@@ -12,7 +12,7 @@ import {ReadRating} from "../post/rating/Rating";
 
 const Posts = (props) => {
     const selectPost = (post) => {
-        props.setOpendPost(post);
+        props.getPost(post.id);
     }
 
     let posts = props.posts.map(post =>
