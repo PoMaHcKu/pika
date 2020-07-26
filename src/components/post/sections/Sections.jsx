@@ -17,8 +17,8 @@ const Sections = (props) => {
             <CloudinaryContext cloudName="dimo51hgd">
                 <Image publicId={section.imageId}/>
             </CloudinaryContext>
-            <div className={section.liked ? style.like : style.dislike}>
-                <img src={section.liked ? like : dislike}
+            <div className={section.liked ? style.dislike : style.like}>
+                <img src={section.liked ? dislike : like}
                      onClick={!section.liked ?
                          () => props.likeSection(section.id) :
                          () => props.dislikeSection(section.id)}
