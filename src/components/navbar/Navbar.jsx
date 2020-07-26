@@ -16,7 +16,7 @@ const Navbar = (props) => {
                     <div className="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/main">Main</NavLink>
+                                <NavLink className="nav-link" to="/">Main</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/posts">Posts</NavLink>

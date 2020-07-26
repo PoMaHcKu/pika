@@ -14,6 +14,7 @@ import Preloader from "./components/common/preloader/Preloader";
 import NewPost from "./components/new-post-page/NewPost";
 import Search from "./components/find/Search";
 import {searchPosts} from "./redux/PostReducer";
+import MainPageContainer from "./components/main-page/MainPageContainer";
 
 class App extends React.Component {
 
@@ -37,7 +38,7 @@ class App extends React.Component {
                         <Route path={"/post"} render={() => <PostContainer/>}/>
                         <Route path={"/login"} render={() => <Login/>}/>
                         <Route path={"/new"} render={() => <NewPost/>}/>
-                        <Route exactPath={"/"}/>
+                        <Route exact path={"/"} render={() => <MainPageContainer/>}/>
                     </Container>
                 </div>
             </BrowserRouter>

@@ -9,6 +9,7 @@ import userReducer from "./UsersReducer";
 import appReducer from "./AppReduser";
 import paginationReducer from "./PaginationReducer";
 import newPostReducer from "./NewPostReducer";
+import mainPageReducer from "./MainPageReducer";
 
 const saveState = (state) => {
     try {
@@ -39,6 +40,7 @@ let reducers = combineReducers(
         commentariesState: commentaryReducer,
         usersState: userReducer,
         paginationState: paginationReducer,
+        mainPageState: mainPageReducer,
         form: formReducer
     }
 );

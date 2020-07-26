@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <Row className="jumbotron text-light bg-dark text-center m-auto ">
             <Col>
-                <NavLink to={"/main"}>
+                <NavLink to={"/"}>
                     <h1>PIKACHY</h1>
                 </NavLink>
                 <p>Here you can read and write about some things...</p>
