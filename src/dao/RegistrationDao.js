@@ -1,12 +1,4 @@
-import {BaseDao} from "./BaseDao";
-
-const getBase64AuthData = (user) => {
-    return btoa(encodeURIComponent(`${user.username}:${user.password}`)
-        .replace(
-            /%([0-9A-F]{2})/g,
-            (match, p1) => String.fromCharCode(parseInt(p1, 16))
-        ));
-}
+import {BaseDao} from "./BaseDao"
 
 export class RegistrationDao extends BaseDao {
 
@@ -17,28 +9,8 @@ export class RegistrationDao extends BaseDao {
                 return response.data
             })
             .catch(err => {
-                console.log(err.response.data.error);
-                alert(err.response.data.error);
-            });
-    }
-
-    login = (user) => {
-        return this.baseRequest
-            .get("login", {headers: {"Authorization": "Basic " + getBase64AuthData(user)}})
-            .then();
-    }
-
-    authentication = () => {
-        return this.baseRequest
-            .get("auth-me")
-            .then(response => response.data)
-            .catch(err => {
-                console.log(err.response.data.error);
-            });
-    }
-
-    logout = () => {
-        return this.baseRequest
-            .get("sign-out");
+                console.log(err.response.data.error)
+                alert(err.response.data.error)
+            })
     }
 }
