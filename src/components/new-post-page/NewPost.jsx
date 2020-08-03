@@ -1,51 +1,54 @@
-import * as React from "react";
-import {Col, Container, Row} from "reactstrap";
-import {compose} from "redux";
-import {connect} from "react-redux";
-import {createPost, getGenres} from "../../redux/NewPostReducer";
-import NewPostForm from "./NewPostForm";
-import {withRouter} from "react-router-dom";
-import {withoutAuthRedirect} from "../../hoc/WithRedirectToLogin";
+import * as React from 'react'
+import {useCallback, useEffect} from 'react'
+import {Col, Container, Row} from 'reactstrap'
+import {compose} from 'redux'
+import {connect} from 'react-redux'
+import {createPost, getGenres} from '../../redux/NewPostReducer'
+import NewPostForm from './NewPostForm'
+import {withRouter} from 'react-router-dom'
+import {withoutAuthRedirect} from '../../hoc/WithRedirectToLogin'
 
-class NewPost extends React.Component {
+const NewPost = (props) => {
 
-    componentDidMount() {
-        this.props.getGenres();
-    }
+    const {getGenres} = props
 
-    addPost = (data) => {
+    const genres = useCallback(() => getGenres(), [getGenres])
+
+    useEffect(() => {
+        genres()
+    }, [genres])
+
+    const addPost = (data) => {
         let post = {
             title: data.title,
             description: data.description,
             sections: data.sections,
             genre: data.genre,
-            tags: data.tags.split(",")
+            tags: data.tags.split(',')
         }
         if (!post.sections) {
-            alert("Count of sections can't be less one!");
-            return;
+            alert('Count of sections can\'t be less one!')
+            return
         }
-        this.props.createPost(post);
-        this.props.history.push("/post");
+        props.createPost(post)
+        props.history.push('/post')
     }
 
-    render() {
-        return (
-            <Container>
-                <Row>
-                    <Col>
-                        <h3>Creating new post</h3>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <NewPostForm genres={this.props.genres}
-                                     onSubmit={this.addPost}/>
-                    </Col>
-                </Row>
-            </Container>
-        )
-    }
+    return (
+        <Container>
+            <Row>
+                <Col>
+                    <h3>Creating new post</h3>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <NewPostForm genres={props.genres}
+                                 onSubmit={addPost}/>
+                </Col>
+            </Row>
+        </Container>
+    )
 }
 
 const mapStateToProps = (state) => ({
@@ -60,4 +63,4 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withRouter,
     withoutAuthRedirect
-)(NewPost);
+)(NewPost)

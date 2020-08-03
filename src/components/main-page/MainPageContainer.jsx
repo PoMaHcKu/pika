@@ -1,49 +1,23 @@
-import * as React from "react"
-import {connect} from "react-redux"
-import {getAllTags, getTags} from "../../redux/MainPageReducer"
-import Tags from "../posts/tags/Tags";
-import {Col, Row} from "reactstrap";
-import PostsContainer from "../posts/PostsContainer";
-import {Button} from "../common/button/Button";
-import {getByTag} from "../../redux/PostReducer";
+import * as React from 'react'
+import {useCallback, useEffect} from 'react'
+import {connect} from 'react-redux'
+import {getAllTags, getTags} from '../../redux/MainPageReducer'
+import {getByTag} from '../../redux/PostReducer'
+import {MainPage} from './MainPage'
 
-class MainPageContainer extends React.Component {
+const MainPageContainer = (props) => {
 
-    componentDidMount() {
-        this.props.getTags();
-    }
+    const {getTags} = props
 
-    render() {
-        return (
-            <div>
-                <Row>
-                    <Col>
-                        <h3>TAGS</h3>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className="p-5 border border-light">
-                        <Tags getByTag={this.props.getByTag} tags={this.props.tags}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Button lable={"GET MORE TAGS"} onClick={() => getAllTags()}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <h3>POSTS</h3>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <PostsContainer/>
-                    </Col>
-                </Row>
-            </div>
-        )
-    }
+    const getSomeTags = useCallback(() => getTags(), [getTags])
+
+    useEffect(() => {
+        getSomeTags()
+    }, [getSomeTags])
+
+    return <MainPage tags={props.tags}
+                     getByTag={props.getByTag}
+                     getAllTags={props.getAllTags}/>
 }
 
 const mapStateToProps = (state) => ({

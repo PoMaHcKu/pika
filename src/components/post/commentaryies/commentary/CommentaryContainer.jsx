@@ -1,20 +1,27 @@
-import * as React from "react";
-import {connect} from "react-redux";
-import {getAuthor} from "../../../../redux/CommentaryReducer";
-import Commentary from "./Commentary";
+import * as React from 'react'
+import {useCallback, useEffect, useState} from 'react'
+import {connect} from 'react-redux'
+import {getAuthor} from '../../../../redux/CommentaryReducer'
+import Commentary from './Commentary'
 
-class CommentaryContainer extends React.Component {
+const CommentaryContainer = props => {
 
-    componentDidMount() {
-        this.props.getAuthor(this.props.commentary);
-    }
+    const [, setAuthor] = useState(props.commentary.author)
+    const [comment] = useState(props.commentary)
+    const {getAuthor} = props
 
-    render() {
-        return <Commentary commentary={this.props.commentary}/>;
-    }
+    const getUser = useCallback(comment => {
+        setAuthor(getAuthor(comment))
+    }, [getAuthor])
+
+    useEffect(() => {
+        getUser(comment)
+    }, [getUser, comment])
+
+    return <Commentary commentary={comment}/>
 }
 
 const mapDispatchToProps = {
     getAuthor,
 }
-export default connect(null, mapDispatchToProps)(CommentaryContainer);
+export default connect(null, mapDispatchToProps)(CommentaryContainer)

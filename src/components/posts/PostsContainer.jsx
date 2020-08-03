@@ -1,27 +1,27 @@
-import * as React from "react";
-import {getByGenre, getByTag, getPost, getPosts} from "../../redux/PostReducer";
-import {connect} from "react-redux";
-import Posts from "./Posts";
+import * as React from 'react'
+import {useEffect} from 'react'
+import {getByGenre, getByTag, getPost, getPosts} from '../../redux/PostReducer'
+import {connect} from 'react-redux'
+import Posts from './Posts'
 
-class PostsContainer extends React.Component {
+const PostsContainer = (props) => {
 
-    componentDidMount() {
-        if (this.props.posts.length === 0) {
-            this.props.getPosts();
+    useEffect(() => {
+            if (props.posts.length === 0) {
+                props.getPosts()
+            }
         }
-    }
+    )
 
-    render() {
-        return (
-            <Posts posts={this.props.posts}
-                   getPosts={this.props.getPosts}
-                   isLoading={this.props.isLoading}
-                   getPost={this.props.getPost}
-                   getByTag={this.props.getByTag}
-                   getByGenre={this.props.getByGenre}
-            />
-        )
-    }
+    return (
+        <Posts posts={props.posts}
+               getPosts={props.getPosts}
+               isLoading={props.isLoading}
+               getPost={props.getPost}
+               getByTag={props.getByTag}
+               getByGenre={props.getByGenre}
+        />
+    )
 }
 
 const mapStateToProps = (state) => ({
@@ -36,4 +36,4 @@ const mapDispatchToProps = {
     getByGenre
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer)

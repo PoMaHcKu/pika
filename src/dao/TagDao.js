@@ -1,4 +1,5 @@
 import baseRequest from './BaseRequest'
+import {getToken} from "../redux/selector/authSelector"
 
 export const getTagsRequest = () => {
     return baseRequest()
@@ -8,6 +9,6 @@ export const getTagsRequest = () => {
 }
 
 export const getAllTagsRequest = (page = 0) => {
-    return baseRequest
-        .patch(`tag?${page}`)
+    return baseRequest(getToken())
+        .patch(`tag?page=${page}`)
 }

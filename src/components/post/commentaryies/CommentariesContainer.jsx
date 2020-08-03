@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {useCallback, useEffect} from 'react'
 import Commentaries from './Commentaries'
 import {getCommentaries} from '../../../redux/CommentaryReducer'
 import {connect} from 'react-redux'
@@ -6,22 +7,25 @@ import {compose} from 'redux'
 import {WithCommentarySocket} from '../../../hoc/WithCommentarySocket'
 import {isAuth} from '../../../redux/selector/authSelector'
 
-class CommentariesContainer extends React.Component {
+const CommentariesContainer = props => {
 
-    componentDidMount() {
-        this.props.getCommentaries(undefined, undefined, undefined, this.props.postId)
-    }
+    const {postId, getCommentaries} = props
 
-    render() {
-        return (
-            <Commentaries commentaries={this.props.commentaries}
-                          sendComment={this.props.addCommentary}
-                          getCommentaries={this.props.getCommentaries}
-                          postId={this.props.postId}
-                          isAuth={this.props.isAuth}
-            />
-        )
-    }
+    const getComment = useCallback(id => getCommentaries(undefined, undefined, undefined, id),
+        [getCommentaries])
+
+    useEffect(() => {
+        getComment(postId)
+    }, [getComment, postId])
+
+    return (
+        <Commentaries commentaries={props.commentaries}
+                      sendComment={props.addCommentary}
+                      getCommentaries={props.getCommentaries}
+                      postId={props.postId}
+                      isAuth={props.isAuth}
+        />
+    )
 }
 
 const mapStateToProps = (state) => ({
