@@ -1,24 +1,24 @@
-import * as React from "react";
-import style from "./Posts.module.css"
-import {Col, Container, Row} from "reactstrap";
-import Preloader from "../common/preloader/Preloader";
-import SortButtons from "./sort-button/SortButtons";
-import Sections from "./section/Sections";
-import {NavLink} from "react-router-dom";
-import Pagination from "../pagination/Pagination";
-import Genre from "./genre/Genre";
-import Tags from "./tags/Tags";
-import {ReadRating} from "../post/rating/Rating";
+import * as React from 'react'
+import style from './Posts.module.css'
+import {Col, Container, Row} from 'reactstrap'
+import Preloader from '../common/preloader/Preloader'
+import SortButtons from './sort-button/SortButtons'
+import Sections from './section/Sections'
+import {NavLink} from 'react-router-dom'
+import Pagination from '../pagination/Pagination'
+import Genre from './genre/Genre'
+import Tags from './tags/Tags'
+import {ReadRating} from '../post/rating/Rating'
 
 const Posts = (props) => {
     const selectPost = (post) => {
-        props.getPost(post.id);
+        props.getPost(post.id)
     }
 
     let posts = props.posts.map(post =>
         <Row className={`${style.post} bg-dark text-light mb-2 p-2`} key={post.id}>
-            <Col className={"col-5"}>
-                <NavLink to={`/post/${post.id}`} onClick={() => selectPost(post)}>
+            <Col className={'col-5'}>
+                <NavLink onClick={() => selectPost(post)} to={`/post/${post.id}`}>
                     <Row>
                         <Col className={style.title}>
                             <span>{post.title}</span>
@@ -27,7 +27,7 @@ const Posts = (props) => {
                 </NavLink>
                 <Row>
                     <Col className={style.like}>
-                        <NavLink to={"/posts"}>
+                        <NavLink to={'/posts'}>
                             <Genre genre={post.genre} getByGenre={props.getByGenre}/>
                         </NavLink>
                     </Col>
@@ -64,4 +64,4 @@ const Posts = (props) => {
     )
 }
 
-export default Posts;
+export default Posts

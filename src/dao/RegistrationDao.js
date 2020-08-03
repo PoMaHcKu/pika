@@ -1,16 +1,13 @@
-import {BaseDao} from "./BaseDao"
+import baseRequest from './BaseRequest'
 
-export class RegistrationDao extends BaseDao {
-
-    registration = (user) => {
-        return this.baseRequest
-            .post("registration", user)
-            .then(response => {
-                return response.data
-            })
-            .catch(err => {
-                console.log(err.response.data.error)
-                alert(err.response.data.error)
-            })
-    }
+export const registrationRequest = (user) => {
+    return baseRequest()
+        .post('registration', user)
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err.response.data.error)
+            alert(err.response.data.error)
+        })
 }

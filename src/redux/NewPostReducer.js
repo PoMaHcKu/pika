@@ -1,9 +1,9 @@
-import {GenreDao} from "../dao/GenreDao"
-import {PostDao} from "../dao/PostDao"
-import {setOpenedPost} from "./PostReducer"
+import {getGenresRequest} from '../dao/GenreDao'
+import {setOpenedPost} from './PostReducer'
+import {createPostRequest} from '../dao/PostDao'
 
-const SET_GENRES = "SET-GENRES"
-const CHANGE_LOAD_STATUS = "CHANGE-LOAD-STATUS"
+const SET_GENRES = 'SET-GENRES'
+const CHANGE_LOAD_STATUS = 'CHANGE-LOAD-STATUS'
 
 const defaultState = {
     isLoading: false,
@@ -37,11 +37,8 @@ export const setGenres = (genres) => ({
     genres
 })
 
-const genreDao = new GenreDao()
-const postDao = new PostDao()
-
 export const getGenres = () => dispatch => {
-    return genreDao.getGenres()
+    return getGenresRequest()
         .then(response => {
             if (response.data) {
                 dispatch(setGenres(response.data))
@@ -53,7 +50,7 @@ export const getGenres = () => dispatch => {
 
 export const createPost = (post) => dispatch => {
     dispatch(changeLoadStatus(true))
-    return postDao.createPost(post)
+    return createPostRequest(post)
         .then(response => {
             if (response && response.data) {
                 debugger

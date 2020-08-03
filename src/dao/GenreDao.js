@@ -1,11 +1,8 @@
-import {BaseDao} from "./BaseDao";
+import baseRequest from './BaseRequest'
 
-export class GenreDao extends BaseDao {
-
-    getGenres = () => {
-        return this.baseRequest
-            .get(`genre`)
-            .then(response => response)
-            .catch(response => response.error);
-    }
+export const getGenresRequest = () => {
+    return baseRequest()
+        .get(`genre`)
+        .then(response => response)
+        .catch(response => response.error)
 }

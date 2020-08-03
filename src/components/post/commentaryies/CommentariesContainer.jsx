@@ -1,14 +1,15 @@
-import * as React from "react";
-import Commentaries from "./Commentaries";
-import {getCommentaries} from "../../../redux/CommentaryReducer";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {WithCommentarySocket} from "../../../hoc/WithCommentarySocket";
+import * as React from 'react'
+import Commentaries from './Commentaries'
+import {getCommentaries} from '../../../redux/CommentaryReducer'
+import {connect} from 'react-redux'
+import {compose} from 'redux'
+import {WithCommentarySocket} from '../../../hoc/WithCommentarySocket'
+import {isAuth} from '../../../redux/selector/authSelector'
 
 class CommentariesContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getCommentaries(undefined, undefined, undefined, this.props.postId);
+        this.props.getCommentaries(undefined, undefined, undefined, this.props.postId)
     }
 
     render() {
@@ -25,7 +26,7 @@ class CommentariesContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     commentaries: state.commentariesState.commentaries,
-    isAuth: state.authenticationState.authenticatedUser !== null,
+    isAuth: isAuth(state)
 })
 
 const mapDispatchToProps = {
@@ -35,4 +36,4 @@ const mapDispatchToProps = {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     WithCommentarySocket
-)(CommentariesContainer);
+)(CommentariesContainer)

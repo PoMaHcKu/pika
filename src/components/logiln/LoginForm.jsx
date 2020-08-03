@@ -1,34 +1,33 @@
-import React from "react";
-import {Field, reduxForm} from "redux-form";
+import React from 'react'
+import {Field, reduxForm} from 'redux-form'
 
-let LoginForm = (props) => {
+const LoginForm = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
-            <div className="form-group">
-                <Field className={"form-control"}
-                       name={"username"}
-                       placeholder={"username"}
+            <div className='form-group'>
+                <Field className={'form-control'}
+                       name={'username'}
+                       placeholder={'username'}
                        maxLength={20}
                        required={true}
-                       component={"input"}/>
+                       component={'input'}/>
             </div>
-            <div className="form-group">
+            <div className='form-group'>
                 <Field
-                    className={"form-control"}
-                    name={"password"}
-                    type={"password"}
-                    placeholder={"password"}
+                    className={'form-control'}
+                    name={'password'}
+                    type={'password'}
+                    placeholder={'password'}
                     maxLength={35}
                     required={true}
-                    component={"input"}/>
+                    component={'input'}/>
             </div>
             <button className={`btn btn-dark`} disabled={props.isProcess}>Sign in</button>
         </form>
     )
 }
 
-LoginForm = reduxForm({
-    form: "loginForm"
-})(LoginForm);
-
-export default LoginForm;
+export default reduxForm({
+    form: 'loginForm'
+})(LoginForm)

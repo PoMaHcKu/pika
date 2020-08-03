@@ -1,6 +1,13 @@
-import {PostDao} from "../dao/PostDao"
+import {
+    getByGenreRequest,
+    getByTagRequest,
+    getPostRequest,
+    getPostsRequest,
+    ratePostRequest,
+    searchPostRequest
+} from "../dao/PostDao"
 import {setCountPage, setCurrentPage} from "./PaginationReducer"
-import {SectionDao} from "../dao/SectionDao"
+import {dislikeSectionRequest, getSectionRequest, likeSectionRequest} from "../dao/SectionDao"
 
 const SET_POSTS = "SET-POSTS"
 const CHANGE_LOAD_STATUS = "LOAD"
@@ -18,7 +25,7 @@ const postReducer = (state = defaultState, action) => {
         case SET_POSTS:
             return {
                 ...state,
-                posts: JSON.parse(JSON.stringify(action.posts)),
+                posts: JSON.parse(JSON.stringify(action.posts))
             }
         case CHANGE_LOAD_STATUS:
             return {
@@ -68,9 +75,6 @@ export const setOpenedPost = (post) => ({
     post
 })
 
-const postDao = new PostDao()
-const sectionDao = new SectionDao()
-
 const updateSection = (section) => ({
     type: UPDATE_SECTION,
     section
@@ -78,8 +82,7 @@ const updateSection = (section) => ({
 
 export const getPosts = (sort, page, size) => dispatch => {
     dispatch(changeLoadingStatus(true))
-    return postDao
-        .getPosts(sort, page, size)
+    return getPostsRequest(sort, page, size)
         .then(response => {
             dispatch(changeLoadingStatus(false))
             dispatch(setPosts(response.data.content))
@@ -89,8 +92,7 @@ export const getPosts = (sort, page, size) => dispatch => {
 }
 
 export const likeSection = (id) => dispatch => {
-    return postDao
-        .likeSection(id)
+    return likeSectionRequest(id)
         .then(response => {
             if (response.data) {
                 dispatch(getSection(response.data.id))
@@ -99,8 +101,7 @@ export const likeSection = (id) => dispatch => {
 }
 
 export const dislikeSection = (id) => dispatch => {
-    return postDao
-        .dislikeSection(id)
+    return dislikeSectionRequest(id)
         .then(response => {
             if (response.data) {
                 dispatch(getSection(response.data.id))
@@ -109,8 +110,7 @@ export const dislikeSection = (id) => dispatch => {
 }
 
 export const getByTag = (tag) => dispatch => {
-    return postDao
-        .getByTag(tag)
+    return getByTagRequest(tag)
         .then(response => {
             if (response.data) {
                 dispatch(setPosts(response.data.content))
@@ -118,8 +118,7 @@ export const getByTag = (tag) => dispatch => {
         })
 }
 export const getByGenre = (genre) => dispatch => {
-    return postDao
-        .getByGenre(genre)
+    return getByGenreRequest(genre)
         .then(response => {
             if (response.data) {
                 dispatch(setPosts(response.data.content))
@@ -129,8 +128,7 @@ export const getByGenre = (genre) => dispatch => {
 
 export const searchPosts = (text) => dispatch => {
     dispatch(changeLoadingStatus(true))
-    return postDao
-        .searchPost(text)
+    return searchPostRequest(text)
         .then(response => {
             dispatch(changeLoadingStatus(false))
             dispatch(setPosts(response.data))
@@ -138,22 +136,19 @@ export const searchPosts = (text) => dispatch => {
 }
 
 export const ratePost = (mark, postId) => dispatch => {
-    return postDao
-        .ratePost(mark, postId)
+    return ratePostRequest(mark, postId)
         .then(() => dispatch(getPost(postId)))
 }
 
 export const getPost = (postId) => dispatch => {
-    return postDao
-        .getPost(postId)
+    return getPostRequest(postId)
         .then(response => {
             dispatch(setOpenedPost(response.data))
         })
 }
 
 export const getSection = id => dispatch => {
-    return sectionDao
-        .getSection(id)
+    return getSectionRequest(id)
         .then(response => dispatch(updateSection(response.data)))
 }
 

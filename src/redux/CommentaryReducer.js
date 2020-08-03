@@ -1,11 +1,11 @@
-import {CommentaryDao} from "../dao/CommentaryDao";
-import {UserDao} from "../dao/UserDao";
-import {setCountPage, setCurrentPage} from "./PaginationReducer";
+import {getCommentRequest} from '../dao/CommentaryDao'
+import {setCountPage, setCurrentPage} from './PaginationReducer'
+import {getUserRequest} from '../dao/UserDao'
 
-const SET_COMMENTARIES = "SET-COMMENTARIES";
-const ADD_COMMENTARY = "ADD-COMMENTARY";
-const CHANGE_STATUS = "CHANGE-LOADING-STATUS";
-const SET_AUTHOR = "SET-AUTHOR";
+const SET_COMMENTARIES = 'SET-COMMENTARIES'
+const ADD_COMMENTARY = 'ADD-COMMENTARY'
+const CHANGE_STATUS = 'CHANGE-LOADING-STATUS'
+const SET_AUTHOR = 'SET-AUTHOR'
 
 let defaultState = {
     commentaries: [],
@@ -42,11 +42,11 @@ const commentaryReducer = (state = defaultState, action) => {
                             author: action.user.username
                         }
                     }
-                    return commentary;
+                    return commentary
                 })
             }
         default:
-            return state;
+            return state
     }
 }
 
@@ -69,25 +69,22 @@ const setAuthor = (commentaryId, user) => ({
     user
 })
 
-const commentaryDao = new CommentaryDao();
-const userDao = new UserDao();
-
-export const getCommentaries = (sort = "created", page = 0, size = 10, postId) => dispatch => {
-    dispatch(changeLoadingStatus(true));
-    commentaryDao.getCommentaries(sort, page, size, postId)
+export const getCommentaries = (sort = 'created', page = 0, size = 10, postId) => dispatch => {
+    dispatch(changeLoadingStatus(true))
+    getCommentRequest(sort, page, size, postId)
         .then(response => {
-            dispatch(changeLoadingStatus(false));
-            dispatch(setCommentaries(response.data.content));
-            dispatch(setCountPage(response.data.totalPages));
-            dispatch(setCurrentPage(response.data.number));
-        });
+            dispatch(changeLoadingStatus(false))
+            dispatch(setCommentaries(response.data.content))
+            dispatch(setCountPage(response.data.totalPages))
+            dispatch(setCurrentPage(response.data.number))
+        })
 }
 
 export const getAuthor = (commentary) => dispatch => {
-    userDao.getUser(commentary.user)
+    getUserRequest(commentary.user)
         .then(response => {
-            dispatch(setAuthor(commentary.id, response.data));
-        });
+            dispatch(setAuthor(commentary.id, response.data))
+        })
 }
 
-export default commentaryReducer;
+export default commentaryReducer

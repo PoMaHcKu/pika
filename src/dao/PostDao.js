@@ -1,48 +1,36 @@
-import {BaseDao} from "./BaseDao"
+import baseRequest from './BaseRequest'
+import {getToken} from '../redux/selector/authSelector'
 
-export class PostDao extends BaseDao {
+export const getPostsRequest = (sort = 'created', page = 0, size = 10) => {
+    return baseRequest()
+        .get(`post?page=${page}&size=${size}&sortBy=${sort}`)
+}
 
-    getPosts = (sort = "created", page = 0, size = 10) => {
-        return this.baseRequest
-            .get(`post?page=${page}&size=${size}&sortBy=${sort}`)
-    }
+export const getPostRequest = (postId) => {
+    return baseRequest()
+        .get(`post/${postId}`)
+}
 
-    getPost = (postId) => {
-        return this.baseRequest
-            .get(`post/${postId}`)
-    }
+export const getByTagRequest = (tag, sort = 'created', page = 0, size = 7) => {
+    return baseRequest()
+        .get(`post/tags?tag=${tag}&page=${page}&size=${size}&sortBy=${sort}`)
+}
+export const getByGenreRequest = (genre, sort = 'created', page = 0, size = 7) => {
+    return baseRequest()
+        .get(`post/genre?genre=${genre}&page=${page}&size=${size}&sortBy=${sort}`)
+}
 
-    getByTag = (tag, sort = "created", page = 0, size = 7) => {
-        return this.baseRequest
-            .get(`post/tags?tag=${tag}&page=${page}&size=${size}&sortBy=${sort}`)
-    }
-    getByGenre = (genre, sort = "created", page = 0, size = 7) => {
-        return this.baseRequest
-            .get(`post/genre?genre=${genre}&page=${page}&size=${size}&sortBy=${sort}`)
-    }
+export const createPostRequest = (post) => {
+    return baseRequest(getToken())
+        .post('post', post)
+}
 
-    createPost = (post) => {
-        return this.baseRequest
-            .post("post", post)
-    }
+export const searchPostRequest = (text) => {
+    return baseRequest
+        .get(`post/search/${text}`)
+}
 
-    likeSection = (id) => {
-        return this.baseRequest
-            .get(`section/${id}`)
-    }
-
-    dislikeSection = (id) => {
-        return this.baseRequest
-            .delete(`section/${id}`)
-    }
-
-    searchPost = (text) => {
-        return this.baseRequest
-            .get(`post/search/${text}`)
-    }
-
-    ratePost = (mark, postId) => {
-        return this.baseRequest
-            .get(`rate?mark=${mark}&postId=${postId}`)
-    }
+export const ratePostRequest = (mark, postId) => {
+    return baseRequest
+        .get(`rate?mark=${mark}&postId=${postId}`)
 }

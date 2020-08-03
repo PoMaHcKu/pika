@@ -1,16 +1,13 @@
-import {BaseDao} from "./BaseDao";
+import baseRequest from './BaseRequest'
 
-export class TagDao extends BaseDao {
+export const getTagsRequest = () => {
+    return baseRequest()
+        .get(`tag?count=30`)
+        .then(response => response)
+        .catch(response => response.error)
+}
 
-    getTags = () => {
-        return this.baseRequest
-            .get(`tag?count=30`)
-            .then(response => response)
-            .catch(response => response.error);
-    }
-
-    getAllTags = (page = 0) => {
-        return this.baseRequest
-            .patch(`tag?${page}`)
-    }
+export const getAllTagsRequest = (page = 0) => {
+    return baseRequest
+        .patch(`tag?${page}`)
 }

@@ -1,8 +1,8 @@
-import {TagDao} from "../dao/TagDao";
-import {getPosts as posts} from "./PostReducer";
+import {getAllTagsRequest, getTagsRequest} from '../dao/TagDao'
+import {getPosts as posts} from './PostReducer'
 
-const SET_TAGS = "SET-TAGS";
-const SET_POSTS = "SET-POSTS";
+const SET_TAGS = 'SET-TAGS'
+const SET_POSTS = 'SET-POSTS'
 
 let defaultState = {
     tags: [],
@@ -36,10 +36,8 @@ const setPosts = posts => ({
     posts
 })
 
-const tagDao = new TagDao();
-
 export const getTags = () => dispatch => {
-    tagDao.getTags()
+    getTagsRequest()
         .then(response => {
             if (response && response.data) {
                 dispatch(setTags(response.data))
@@ -47,7 +45,7 @@ export const getTags = () => dispatch => {
         })
 }
 export const getAllTags = (page) => dispatch => {
-    tagDao.getAllTags(page)
+    getAllTagsRequest(page)
         .then(response => {
             if (response && response.data) {
                 dispatch(setTags(response.data))
@@ -64,4 +62,4 @@ export const getPosts = (sort, page, size) => dispatch => {
         }))
 }
 
-export default mainPageReducer;
+export default mainPageReducer

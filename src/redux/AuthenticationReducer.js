@@ -1,11 +1,14 @@
-import {AuthenticationDao} from "../dao/AuthenticationDao";
+import {login as log_in} from '../dao/AuthenticationDao'
 
-const LOGIN = "LOG-IN";
-const LOGOUT = "LOG-OUT";
-const CHANGE_PROCESS = "CHANG";
+const LOGIN = 'LOG-IN'
+const LOGOUT = 'LOG-OUT'
+const CHANGE_PROCESS = 'CHANG'
 
 const defaultState = {
-    currentUser: null,
+    currentUser: {
+        username: null,
+        token: null
+    },
     isProcess: false
 }
 
@@ -14,7 +17,10 @@ const authenticationReducer = (state = defaultState, action) => {
         case LOGIN:
             return {
                 ...state,
-                currentUser: action.username
+                currentUser: {
+                    username: action.data.username,
+                    token: action.data.token
+                }
             }
         case LOGOUT:
             return {
@@ -27,7 +33,7 @@ const authenticationReducer = (state = defaultState, action) => {
                 isProcess: action.isProcess
             }
         default:
-            return state;
+            return state
     }
 }
 
@@ -36,34 +42,30 @@ export const changeProcessStatus = (isProcess) => ({
     isProcess
 })
 
-const setAuthenticatedUser = (username) => ({
-    type: LOGIN,
-    username
-});
+const setAuthenticatedUser = (data) => {
+    return {
+        type: LOGIN,
+        data
+    }
+}
 
 const deleteAuthenticatedUser = () => ({
     type: LOGOUT
 })
 
-const authenticatedDao = new AuthenticationDao();
-
 export const login = (user) => dispatch => {
-    dispatch(changeProcessStatus(true));
-    authenticatedDao.login(user)
-        .then(username => {
-            if (username) {
-                dispatch(setAuthenticatedUser(username));
-            } else {
-                dispatch(setAuthenticatedUser(null));
+    dispatch(changeProcessStatus(true))
+    return log_in(user)
+        .then(data => {
+            dispatch(changeProcessStatus(false))
+            if (data) {
+                dispatch(setAuthenticatedUser(data))
             }
-        });
+        })
 }
 
 export const logout = () => dispatch => {
-    return () => {
-        authenticatedDao.logout()
-        dispatch(deleteAuthenticatedUser())
-    }
+    dispatch(deleteAuthenticatedUser())
 }
 
-export default authenticationReducer;
+export default authenticationReducer

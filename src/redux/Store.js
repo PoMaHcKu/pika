@@ -1,54 +1,39 @@
-import registrationReducer from "./RegistrationReducer";
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import thankMiddleWare from "redux-thunk";
-import {reducer as formReducer} from "redux-form";
-import authenticationReducer from "./AuthenticationReducer";
-import postReducer from "./PostReducer";
-import commentaryReducer from "./CommentaryReducer";
-import userReducer from "./UsersReducer";
-import appReducer from "./AppReduser";
-import paginationReducer from "./PaginationReducer";
-import newPostReducer from "./NewPostReducer";
-import mainPageReducer from "./MainPageReducer";
+import {composeWithDevTools} from 'redux-devtools-extension/index'
+import {persistCombineReducers, persistStore} from 'redux-persist'
+import {applyMiddleware, createStore} from 'redux'
+import {reducer as formReducer} from 'redux-form'
+import storage from 'redux-persist/lib/storage'
+import authenticationReducer from './AuthenticationReducer'
+import registrationReducer from './RegistrationReducer'
+import commentaryReducer from './CommentaryReducer'
+import paginationReducer from './PaginationReducer'
+import mainPageReducer from './MainPageReducer'
+import newPostReducer from './NewPostReducer'
+import userReducer from './UsersReducer'
+import postReducer from './PostReducer'
+import appReducer from './AppReduser'
+import thunk from 'redux-thunk'
 
-const saveState = (state) => {
-    try {
-        const serialisedState = JSON.stringify(state);
-        window.localStorage.setItem('app_state', serialisedState);
-    } catch (err) {
-        console.log(err);
-    }
-};
+const persistConfig = {
+    key: 'root-boot',
+    storage,
+}
 
-const loadState = () => {
-    try {
-        const serialisedState = window.localStorage.getItem('app_state');
-        if (!serialisedState) return undefined;
-        return JSON.parse(serialisedState);
-    } catch (err) {
-        return undefined;
-    }
-};
-
-let reducers = combineReducers(
+let reducers = persistCombineReducers(
+    persistConfig,
     {
-        appState: appReducer,
-        registrationState: registrationReducer,
         authenticationState: authenticationReducer,
-        postsState: postReducer,
-        newPostState: newPostReducer,
+        registrationState: registrationReducer,
         commentariesState: commentaryReducer,
-        usersState: userReducer,
         paginationState: paginationReducer,
         mainPageState: mainPageReducer,
+        newPostState: newPostReducer,
+        postsState: postReducer,
+        usersState: userReducer,
+        appState: appReducer,
         form: formReducer
     }
-);
+)
 
-const oldState = loadState();
-
-export let store = createStore(reducers, oldState, applyMiddleware(thankMiddleWare));
-
-store.subscribe(() => {
-    saveState(store.getState());
-});
+export let store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
+export let persistedStore = persistStore(store)

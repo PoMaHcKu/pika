@@ -1,10 +1,10 @@
-import {BaseDao} from "./BaseDao";
+import baseRequest from './BaseRequest'
 
-export class UserDao extends BaseDao {
-    getUser = (id) => {
-        return this.baseRequest
-            .get(`user/${id}`)
-            .then(response => response)
-            .catch(response => response);
-    }
+export const getUserRequest = (id) => {
+    return baseRequest()
+        .get(`user/${id}`)
+        .then(response => {
+            return response
+        })
+        .catch(response => response);
 }

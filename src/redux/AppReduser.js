@@ -1,6 +1,4 @@
-import {authenticate} from "./AuthenticationReducer";
-
-const SET_INITIALIZED = "SET-INIT";
+const SET_INITIALIZED = 'SET-INIT'
 
 const defaultState = {
     isInitialized: false
@@ -13,9 +11,8 @@ const appReducer = (state = defaultState, action) => {
                 ...state,
                 isInitialized: true,
             }
-
         default:
-            return state;
+            return state
     }
 }
 
@@ -24,11 +21,12 @@ const setInitializedSuccess = () => ({
 })
 
 export const initializeApp = () => dispatch => {
-    let promise = dispatch(authenticate());
-    Promise.all([promise])
-        .then(() => {
-            dispatch(setInitializedSuccess());
-        });
+    //  let promise = dispatch(login())
+    // Promise.all([promise])
+    //     .then(() => {
+    //         dispatch(setInitializedSuccess())
+    //     })
+    dispatch(setInitializedSuccess())
 }
 
-export default appReducer;
+export default appReducer

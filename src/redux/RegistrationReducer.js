@@ -1,7 +1,7 @@
-import {RegistrationDao} from "../dao/RegistrationDao";
+import {registrationRequest} from '../dao/RegistrationDao'
 
-const REGISTRATION = "REGISTRATION";
-const CHANGE_PROCESS = "CHANG";
+const REGISTRATION = 'REGISTRATION'
+const CHANGE_PROCESS = 'CHANG'
 
 
 const defaultState = {
@@ -22,7 +22,7 @@ const registrationReducer = (state = defaultState, action) => {
                 isProcess: action.isProcess
             }
         default:
-            return state;
+            return state
     }
 }
 
@@ -34,23 +34,20 @@ export const changeProcessStatus = (isProcess) => ({
 const registration = (user) => ({
     type: REGISTRATION,
     user
-});
+})
 
-const registrationDao = new RegistrationDao();
 
-export const registrationUser = (user) => {
-    return (dispatch) => {
-        dispatch(changeProcessStatus(true));
-        registrationDao.registration(user)
-            .then(data => {
-                dispatch(changeProcessStatus(false));
-                if (data && data.id != null) {
-                    dispatch(registration(data));
-                    alert("Successful. Now you can log in.");
-                    return data.id;
-                }
-            });
-    }
+export const registrationUser = (user) => dispatch => {
+    dispatch(changeProcessStatus(true))
+    registrationRequest(user)
+        .then(data => {
+            dispatch(changeProcessStatus(false))
+            if (data && data.id != null) {
+                dispatch(registration(data))
+                alert('Successful. Now you can log in.')
+                return data.id
+            }
+        })
 }
 
-export default registrationReducer;
+export default registrationReducer
