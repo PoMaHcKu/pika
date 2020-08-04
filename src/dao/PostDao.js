@@ -26,11 +26,11 @@ export const createPostRequest = (post) => {
 }
 
 export const searchPostRequest = (text) => {
-    return baseRequest
+    return baseRequest()
         .get(`post/search/${text}`)
 }
 
 export const ratePostRequest = (mark, postId) => {
-    return baseRequest
+    return baseRequest()
         .get(`rate?mark=${mark}&postId=${postId}`)
 }
