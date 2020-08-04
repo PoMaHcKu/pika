@@ -49,7 +49,7 @@ const Post = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <Rating currentRate={props.post.rating} postId={props.post.id}/>
+                    <Rating currentRate={props.post.rating} postId={props.post.id} readOnly={!props.isAuth}/>
                 </Col>
             </Row>
             <Row>

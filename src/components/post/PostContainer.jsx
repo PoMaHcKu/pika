@@ -4,6 +4,7 @@ import Post from "./Post";
 import {getByGenre, getByTag, ratePost} from "../../redux/PostReducer";
 import Preloader from "../common/preloader/Preloader";
 import {connect} from "react-redux";
+import {isAuth} from "../../redux/selector/authSelector";
 
 const PostContainer = (props) => {
 
@@ -14,7 +15,8 @@ const PostContainer = (props) => {
                     <Post post={props.post}
                           getByGenre={props.getByGenre}
                           getByTag={props.getByTag}
-                          rate={props.ratePost}/>
+                          rate={props.ratePost}
+                          isAuth={props.isAuth}/>
                 </Col>
             </Row>
     )
@@ -23,7 +25,8 @@ const PostContainer = (props) => {
 const mapStateToProps = (state) => ({
     post: state.postsState.openedPost,
     creatingNewPost: state.newPostState.isLoading,
-    isLoadingPost: state.postsState.isLoading
+    isLoadingPost: state.postsState.isLoading,
+    isAuth: isAuth(state)
 })
 
 const mapDispatchToProps = {

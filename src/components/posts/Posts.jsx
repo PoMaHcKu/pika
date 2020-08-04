@@ -8,7 +8,7 @@ import {NavLink} from 'react-router-dom'
 import Pagination from '../pagination/Pagination'
 import Genre from './genre/Genre'
 import Tags from './tags/Tags'
-import {ReadRating} from '../post/rating/Rating'
+import Rating from '../post/rating/Rating'
 
 const Posts = (props) => {
     const selectPost = (post) => {
@@ -34,7 +34,7 @@ const Posts = (props) => {
                 </Row>
                 <Row>
                     <Col className={style.like}>
-                        <ReadRating postId={post.id} currentRate={post.rating}/>
+                        <Rating postId={post.id} currentRate={post.rating} readOnly={true}/>
                     </Col>
                 </Row>
                 <Row>
