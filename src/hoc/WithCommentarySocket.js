@@ -20,7 +20,7 @@ export const WithCommentarySocket = Component => {
         render() {
             return (
                 <div>
-                    <SockJsClient url='http://localhost:8080/commentary-messaging'
+                    <SockJsClient url='https://pikachy.herokuapp.com/commentary-messaging'
                                   headers={{'X-Authorization': getToken()}}
                                   topics={[`/topic/commentary/${this.props.postId}`]}
                                   onMessage={msg => this.props.addCommentary(msg)}

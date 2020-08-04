@@ -2,7 +2,7 @@ import axios from "axios"
 
 const baseRequest = (token = null) => {
     const authHeader = {
-        baseURL: 'http://localhost:8080',
+        baseURL: 'http://pikachy.herokuapp.com/',
         headers: {
             Authorization: token ? `Bearer ${token}` : null,
         }
