@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 const PostContainer = (props) => {
 
     return (
-        props.creatingNewPost ? <Preloader/> :
+        (props.creatingNewPost || props.isLoadingPost) ? <Preloader/> :
             <Row>
                 <Col>
                     <Post post={props.post}
@@ -22,7 +22,8 @@ const PostContainer = (props) => {
 
 const mapStateToProps = (state) => ({
     post: state.postsState.openedPost,
-    creatingNewPost: state.newPostState.isLoading
+    creatingNewPost: state.newPostState.isLoading,
+    isLoadingPost: state.postsState.isLoading
 })
 
 const mapDispatchToProps = {

@@ -3,6 +3,7 @@ import {compose} from 'redux'
 import {connect} from 'react-redux'
 import SockJsClient from 'react-stomp'
 import {addCommentary} from '../redux/CommentaryReducer'
+import {getToken} from "../redux/selector/authSelector";
 
 let mapStateToProps = (state) => ({
     postId: state.postsState.openedPost.id,
@@ -20,6 +21,7 @@ export const WithCommentarySocket = Component => {
             return (
                 <div>
                     <SockJsClient url='http://localhost:8080/commentary-messaging'
+                                  headers={{'X-Authorization': getToken()}}
                                   topics={[`/topic/commentary/${this.props.postId}`]}
                                   onMessage={msg => this.props.addCommentary(msg)}
                                   ref={client => this.clientRef = client}/>
