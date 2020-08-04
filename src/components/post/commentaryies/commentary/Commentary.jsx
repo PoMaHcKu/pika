@@ -3,7 +3,6 @@ import {Col, Row} from 'reactstrap';
 import style from './Commentaries.module.css';
 
 let Commentary = (props) => {
-    debugger
     return (
         <Row key={props.commentary.id} className={style.commentary}>
                 <Col className={`col-12 ${style.author}`}>
