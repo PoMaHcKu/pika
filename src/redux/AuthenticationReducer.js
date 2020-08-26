@@ -1,4 +1,5 @@
-import {login as log_in} from '../dao/AuthenticationDao'
+import {login as log_in, refreshLogin as refresh_login} from '../dao/AuthenticationDao'
+import {store} from "./Store";
 
 const LOGIN = 'LOG-IN'
 const LOGOUT = 'LOG-OUT'
@@ -7,7 +8,8 @@ const CHANGE_PROCESS = 'CHANG'
 const defaultState = {
     currentUser: {
         username: null,
-        token: null
+        token: null,
+        refreshToken: null
     },
     isProcess: false
 }
@@ -19,7 +21,8 @@ const authenticationReducer = (state = defaultState, action) => {
                 ...state,
                 currentUser: {
                     username: action.data.username,
-                    token: action.data.token
+                    token: action.data.token,
+                    refreshToken: action.data.refreshToken
                 }
             }
         case LOGOUT:
@@ -58,10 +61,16 @@ export const login = (user) => dispatch => {
     return log_in(user)
         .then(data => {
             dispatch(changeProcessStatus(false))
-            if (data) {
-                dispatch(setAuthenticatedUser(data))
-            }
-        })
+            dispatch(setAuthenticatedUser(data))
+        }, () => dispatch(changeProcessStatus(false)))
+}
+
+export const refreshLogin = () => dispatch => {
+    return refresh_login(store.getState().authenticationState.currentUser.refreshToken)
+        .then(
+            data => dispatch(setAuthenticatedUser(data)),
+            () => window.location.href = '/login'
+        )
 }
 
 export const logout = () => dispatch => {
