@@ -1,20 +1,27 @@
 import axios from "axios"
+import {getToken} from "../redux/selector/authSelector";
+import {store} from "../redux/Store";
 
-const baseRequest = (token = null) => {
-    const authHeader = {
-        baseURL: 'https://pikachy.herokuapp.com/',
-        headers: {
-            Authorization: token ? `Bearer ${token}` : null,
+const instance = axios.create()
+instance.defaults.baseURL = 'https://pikachy.herokuapp.com/'
+instance.defaults.headers.post['Content-Type'] = 'application/json'
+instance.interceptors.response.use(
+    res => res,
+    error => {
+        if (error.response.status === 401) {
+            store.getState().authenticationState.currentUser = null
+            window.location.replace('/login')
         }
+        debugger
+        return Promise.reject(error);
     }
+)
 
-    return {
-        get: (url, options = {}) => axios.get(url, {...authHeader, ...options}),
-        post: (url, data, options = {}) => axios.post(url, data, {...authHeader, ...options}),
-        put: (url, data, options = {}) => axios.put(url, data, {...authHeader, ...options}),
-        patch: (url, data, options = {}) => axios.patch(url, data, {...authHeader, ...options}),
-        delete: (url, options = {}) => axios.delete(url, {...authHeader, ...options}),
+const baseRequest = () => {
+    let token = getToken()
+    if (token) {
+        instance.defaults.headers.common['Authorization'] = 'Bearer ' + getToken()
     }
+    return instance
 }
-
-export default baseRequest;
+export default baseRequest

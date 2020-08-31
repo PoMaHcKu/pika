@@ -1,5 +1,4 @@
 import baseRequest from './BaseRequest'
-import {getToken} from '../redux/selector/authSelector'
 
 export const getPostsRequest = (sort = 'created', page = 0, size = 10) => {
     return baseRequest()
@@ -21,7 +20,7 @@ export const getByGenreRequest = (genre, sort = 'created', page = 0, size = 7) =
 }
 
 export const createPostRequest = (post) => {
-    return baseRequest(getToken())
+    return baseRequest()
         .post('post', post)
 }
 
